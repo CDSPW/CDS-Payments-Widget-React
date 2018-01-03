@@ -3,134 +3,91 @@
 exports[`<FuelSavingsPage /> should match snapshot 1`] = `
 <div>
   <h2>
-    Fuel Savings Analysis
+    Payments Widget
   </h2>
   <table>
     <tbody>
       <tr>
         <td>
           <label
-            htmlFor="newMpg"
+            htmlFor="ccNumber"
           >
-            New Vehicle MPG
+            CC Number
           </label>
         </td>
         <td>
           <input
-            className="small"
-            name="newMpg"
+            className="cc-number"
+            data-cds="ccNumber"
+            id="cc-number"
+            name="ccNumber"
             onChange={[Function]}
             placeholder={undefined}
+            required={true}
             type="text"
-            value=""
+            value={undefined}
           />
         </td>
       </tr>
       <tr>
         <td>
           <label
-            htmlFor="tradeMpg"
+            htmlFor="ccNumber"
           >
-            Trade-in MPG
+            CC Number
           </label>
         </td>
         <td>
           <input
-            className="small"
-            name="tradeMpg"
-            onChange={[Function]}
-            placeholder={undefined}
-            type="text"
-            value=""
+            data-cds="cipher"
+            id="cipher"
+            placeholder="Cipher"
+            readOnly={true}
+            type="input"
           />
         </td>
       </tr>
       <tr>
         <td>
           <label
-            htmlFor="newPpg"
+            htmlFor="ccNumber"
           >
-            New Vehicle price per gallon
+            CC Number
           </label>
         </td>
         <td>
           <input
-            className="small"
-            name="newPpg"
-            onChange={[Function]}
-            placeholder={undefined}
-            type="text"
-            value=""
+            data-cds="cardType"
+            disabled={true}
+            id="cardType"
+            placeholder="Card Type"
+            readOnly={true}
+            type="input"
           />
         </td>
       </tr>
       <tr>
         <td>
           <label
-            htmlFor="tradePpg"
+            htmlFor="ccNumber"
           >
-            Trade-in price per gallon
+            CC Number
           </label>
         </td>
         <td>
           <input
-            className="small"
-            name="tradePpg"
-            onChange={[Function]}
-            placeholder={undefined}
-            type="text"
-            value=""
+            data-cds="responseCode"
+            disabled={true}
+            id="responseCode"
+            readOnly={true}
+            style={
+              Object {
+                "border": "none",
+              }
+            }
+            type="input"
           />
         </td>
-      </tr>
-      <tr>
-        <td>
-          <label
-            htmlFor="milesDriven"
-          >
-            Miles Driven
-          </label>
-        </td>
-        <td>
-          <input
-            className="small"
-            name="milesDriven"
-            onChange={[Function]}
-            placeholder={undefined}
-            type="text"
-            value=""
-          />
-          miles per
-          <select
-            name="milesDrivenTimeframe"
-            onChange={[Function]}
-            value="week"
-          >
-            <option
-              value="week"
-            >
-              Week
-            </option>
-            <option
-              value="month"
-            >
-              Month
-            </option>
-            <option
-              value="year"
-            >
-              Year
-            </option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <label>
-            Date Modified
-          </label>
-        </td>
-        <td />
       </tr>
     </tbody>
   </table>

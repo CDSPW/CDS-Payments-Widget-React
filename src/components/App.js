@@ -16,6 +16,8 @@ class App extends React.Component {
     const activeStyle = { color: 'blue' };
     return (
       <div>
+
+        {false &&
         <div>
           <NavLink exact to="/" activeStyle={activeStyle}>Home</NavLink>
           {' | '}
@@ -23,8 +25,10 @@ class App extends React.Component {
           {' | '}
           <NavLink to="/about" activeStyle={activeStyle}>About</NavLink>
         </div>
+      }
         <Switch>
-          <Route exact path="/" component={HomePage} />
+          <Route exact path="/" component={FuelSavingsPage} />
+          <Route exact path="/home" component={HomePage} />
           <Route path="/fuel-savings" component={FuelSavingsPage} />
           <Route path="/about" component={AboutPage} />
           <Route component={NotFoundPage} />

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const FuelSavingsTextInput = ({name, value, placeholder, onChange}) => {
+const FuelSavingsTextInput = ({name, value, placeholder, onChange, ...props}) => {
   return (
     <input
       className="small"
@@ -9,7 +9,9 @@ const FuelSavingsTextInput = ({name, value, placeholder, onChange}) => {
       type="text"
       placeholder={placeholder}
       value={value}
-      onChange={onChange}/>
+      onChange={onChange}
+      {...props}
+      />
   );
 };
 

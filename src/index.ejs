@@ -4,6 +4,7 @@
   **NOTE:** This is a template for index.html. It uses ejs and htmlWebpackPlugin to generate a different index.html for each environment. htmlWebpackPlugin will dynamically add references to the scripts and styles that it bundles to this file. The generated bundles have hash-based filenames, so it's necessary to add the references dynamically.
   For more info on ejs, see http://www.embeddedjs.com/. For examples of using it with htmlWebpackPlugin, see https://github.com/jaketrent/html-webpack-template/blob/master/index.ejs
   -->
+
 <head>
   <!--
     The htmlWebpackPlugin will parse the logic below so that trackJS is only added to the production version of index.html (since only webpack.config.prod.js provides the trackJS token)
@@ -11,15 +12,104 @@
     To track JavaScript errors via TrackJS, sign up for a free trial at TrackJS.com and enter your token in /webpack.config.prod.js on line 55.
    -->
   <% if (htmlWebpackPlugin.options.trackJSToken) { %>
-  <script>window._trackJs = {token: '<%= htmlWebpackPlugin.options.trackJSToken %>'};</script>
-  <script src="https://d2zah9y47r7bi2.cloudfront.net/releases/current/tracker.js"></script>
-  <% } %>
+    <script>window._trackJs = { token: '<%= htmlWebpackPlugin.options.trackJSToken %>' };</script>
+    <script src="https://d2zah9y47r7bi2.cloudfront.net/releases/current/tracker.js"></script>
+    <% } %>
+      <script src="https://s3.amazonaws.com/cds-tzn-test/resources/cds-process.min.js"></script>
+      <script>
+        var logMe = messageToLog => valueToLog => console.warn(
+          messageToLog,
+          ' : ',
+          (undefined !== valueToLog) && valueToLog
+        );
+        var logThings = message => console.warn({
+          '    responseCode': responseCode.value,
+          '    message': message,
+          '    cipher': document.querySelector('[data-cds = "cipher"]').value,
+          '    cardType': document.querySelector('[data-cds = "cardType"]').value,
+          '    ccNumber': document.querySelector('[data-cds = "ccNumber"]').value,
+          '    reportedEncryptionResponse': CDS.cdsProcess.reportedEncryptionResponse,
+          '    clientCode()': CDS.cdsProcess.clientCode(),
+          '    cdsCard': CDS.cdsProcess.cdsCard,
+          '---------  Thats all folks ': '---------'
+        });
+        logMe('Ready....')('Go!');
 
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta charset="utf-8"/>
-  <title>React Slingshot</title>
+        var handleValidationDisplay = function () {
+          var responseCode = document
+            .querySelector('[data-cds = "responseCode"]')
+            .value;
+          switch (responseCode) {
+            case '100':
+              logThings('Successful encryption, client can read the data rendered by plug in client can read the cipherfrom the hidden field card type can be read from the card type hidden field');
+              break;
+            case '003':
+              logThings('Inform the user about invalid card number entered');
+              break;
+            case '':
+              logThings('Inform the user aboutcard number field being empty');
+              break;
+            case '753':
+              logThings('Inform the user about card type is not allowed');
+              break;
+            case '074':
+              logThings('This is optional can be used if you want to have any functionality while the user is entering the credit card number');
+              break;
+            case '075':
+              logThings('Please correct the configuration provided for the plugin');
+              break;
+            case '099':
+              logThings('Please contact CDS to reportthis system error, this can also be due to client not being registered with CDS');
+              break;
+            default:
+              logThings('default case');
+          }
+        }
+        CDS.cdsProcess.allowedCards = ['MC', 'VI', 'AX', 'DI', 'DC', 'JCB'];
+        CDS.cdsProcess.clientCode('abc');
+
+        setTimeout(function () { handleValidationDisplay(); }, 2000);
+        setTimeout(function () { handleValidationDisplay(); }, 3000);
+        setTimeout(function () { handleValidationDisplay(); }, 5000);
+        document.addEventListener(
+          "DOMContentLoaded",
+          function () {
+            if (document.querySelector('[data-cds =     responseCode"]').value == "075") {
+              handleValidationDisplay();
+              //Appropriate client desired handler can be defined
+            }
+            document.querySelector('input[data-cds = "responseCode"]').addEventListener('change', function () {
+              handleValidationDisplay();
+              //Appropriate client desired handlercan be defined
+            });
+          });
+
+        CDS.cdsProcess.cdsCard.addEventListener(
+          'cdsCardValChange',
+          function (cdsResponse) {
+            if (
+              document.readyState === "complete"
+              || (document.readyState !== "loading" && !document.documentElement.doScroll)
+            ) {
+              handleValidationDisplay(cdsResponse);
+              //Appropriate client desired handler can be defined
+            } else {
+              document.addEventListener("DOMContentLoaded", function () {
+                handleValidationDisplay(cdsResponse);
+                //Appropriate client desired handlercan be defined
+              });
+            }
+          });
+
+      </script>
+
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta charset="utf-8" />
+      <title>React Slingshot</title>
 </head>
+
 <body>
-<div id="app"></div>
+  <div id="app"></div>
 </body>
+
 </html>

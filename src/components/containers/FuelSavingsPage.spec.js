@@ -14,6 +14,7 @@ describe("<FuelSavingsPage />", () => {
   };
 
   it("should contain <FuelSavingsForm />", () => {
+
     const wrapper = shallow(
       <FuelSavingsPage
         actions={actions}
@@ -50,7 +51,7 @@ describe("<FuelSavingsPage />", () => {
     const name = "newMpg";
     const value = 10;
 
-    const input = wrapper.find('input[name="newMpg"]');
+    const input = wrapper.find('input[name="ccNumber"]');
     input.simulate("change", { target: { name, value } });
 
     expect(actions.calculateFuelSavings).toHaveBeenCalledWith(

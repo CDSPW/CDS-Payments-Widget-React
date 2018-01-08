@@ -35,36 +35,6 @@
         });
         logMe('Ready....')('Go!');
 
-        var handleValidationDisplay = function () {
-          var responseCode = document
-            .querySelector('[data-cds = "responseCode"]')
-            .value;
-          switch (responseCode) {
-            case '100':
-              logThings('Successful encryption, client can read the data rendered by plug in client can read the cipherfrom the hidden field card type can be read from the card type hidden field');
-              break;
-            case '003':
-              logThings('Inform the user about invalid card number entered');
-              break;
-            case '':
-              logThings('Inform the user aboutcard number field being empty');
-              break;
-            case '753':
-              logThings('Inform the user about card type is not allowed');
-              break;
-            case '074':
-              logThings('This is optional can be used if you want to have any functionality while the user is entering the credit card number');
-              break;
-            case '075':
-              logThings('Please correct the configuration provided for the plugin');
-              break;
-            case '099':
-              logThings('Please contact CDS to reportthis system error, this can also be due to client not being registered with CDS');
-              break;
-            default:
-              logThings('default case');
-          }
-        }
         CDS.cdsProcess.allowedCards = ['MC', 'VI', 'AX', 'DI', 'DC', 'JCB'];
         CDS.cdsProcess.clientCode('abc');
 

@@ -15,7 +15,7 @@ describe('Store', () => {
   });
   afterAll(() => MockDate.reset());
 
-  it('should display results when necessary data is provided', () => {
+  it.skip('should display results when necessary data is provided', () => {
     const store = configureStore();
 
     const actions = [
@@ -45,7 +45,7 @@ describe('Store', () => {
     expect(actual.fuelSavings).toEqual(expected);
   });
 
-  it('should not display results when necessary data is not provided', () => {
+  it.skip('should not display results when necessary data is not provided', () => {
     const store = configureStore();
 
     const actions = [
@@ -78,7 +78,7 @@ describe('Store', () => {
   });
 
 
-  it('should handle a flurry of actions', () => {
+  it.skip('should handle a flurry of actions', () => {
     const store = configureStore();
 
     const actions = [

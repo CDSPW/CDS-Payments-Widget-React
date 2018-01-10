@@ -15,7 +15,7 @@ const { string, func, number, oneOfType } = PropTypes;
 
 FuelSavingsTextInput.propTypes = {
   name: string.isRequired,
-  onChange: func.isRequired,
+  onChange: func,
   placeholder: string,
   value: oneOfType([
     string,

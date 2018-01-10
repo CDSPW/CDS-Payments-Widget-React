@@ -15,62 +15,10 @@
     <script>window._trackJs = { token: '<%= htmlWebpackPlugin.options.trackJSToken %>' };</script>
     <script src="https://d2zah9y47r7bi2.cloudfront.net/releases/current/tracker.js"></script>
     <% } %>
-      <script src="https://s3.amazonaws.com/cds-tzn-test/resources/cds-process.min.js"></script>
+      <script src="https://s3.amazonaws.com/cds-tzn-test/resources/cds-process.min.js"> </script>
       <script>
-        var logMe = messageToLog => valueToLog => console.warn(
-          messageToLog,
-          ' : ',
-          (undefined !== valueToLog) && valueToLog
-        );
-        var logThings = message => console.warn({
-          '    responseCode': responseCode.value,
-          '    message': message,
-          '    cipher': document.querySelector('[data-cds = "cipher"]').value,
-          '    cardType': document.querySelector('[data-cds = "cardType"]').value,
-          '    ccNumber': document.querySelector('[data-cds = "ccNumber"]').value,
-          '    reportedEncryptionResponse': CDS.cdsProcess.reportedEncryptionResponse,
-          '    clientCode()': CDS.cdsProcess.clientCode(),
-          '    cdsCard': CDS.cdsProcess.cdsCard,
-          '---------  Thats all folks ': '---------'
-        });
-        logMe('Ready....')('Go!');
-
         CDS.cdsProcess.allowedCards = ['MC', 'VI', 'AX', 'DI', 'DC', 'JCB'];
         CDS.cdsProcess.clientCode('abc');
-
-        setTimeout(function () { handleValidationDisplay(); }, 2000);
-        setTimeout(function () { handleValidationDisplay(); }, 3000);
-        setTimeout(function () { handleValidationDisplay(); }, 5000);
-        document.addEventListener(
-          "DOMContentLoaded",
-          function () {
-            if (document.querySelector('[data-cds =     responseCode"]').value == "075") {
-              handleValidationDisplay();
-              //Appropriate client desired handler can be defined
-            }
-            document.querySelector('input[data-cds = "responseCode"]').addEventListener('change', function () {
-              handleValidationDisplay();
-              //Appropriate client desired handlercan be defined
-            });
-          });
-
-        CDS.cdsProcess.cdsCard.addEventListener(
-          'cdsCardValChange',
-          function (cdsResponse) {
-            if (
-              document.readyState === "complete"
-              || (document.readyState !== "loading" && !document.documentElement.doScroll)
-            ) {
-              handleValidationDisplay(cdsResponse);
-              //Appropriate client desired handler can be defined
-            } else {
-              document.addEventListener("DOMContentLoaded", function () {
-                handleValidationDisplay(cdsResponse);
-                //Appropriate client desired handlercan be defined
-              });
-            }
-          });
-
       </script>
 
       <meta http-equiv="X-UA-Compatible" content="IE=edge">

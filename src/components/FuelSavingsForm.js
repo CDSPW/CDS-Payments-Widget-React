@@ -2,26 +2,189 @@ import React from 'react';
 import { func } from 'prop-types';
 import FuelSavingsTextInput from './FuelSavingsTextInput';
 import { fuelSavings } from '../types';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
+import lightBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { Card, CardTitle} from 'material-ui/Card';
+import Divider from 'material-ui/Divider';
+import Avatar from 'material-ui/Avatar';
+import List from 'material-ui/List/List';
+import ListItem from 'material-ui/List/ListItem';
+import RaisedButton from 'material-ui/RaisedButton';
+import FontIcon from 'material-ui/FontIcon';
+import Checkbox from 'material-ui/Checkbox';
+import TextField from 'material-ui/TextField';
+import DatePicker from 'material-ui/DatePicker';
+
 
 const FuelSavingsForm = ({ fuelSavings, onChange }) =>
   (
     <div>
+      <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+        <Card
+          style={{ width: 650 }}
+        >
+          <CardTitle title="Choose your preferred payment option:" />
+          <List>
+            <ListItem
+              leftAvatar={<Avatar style={{ marginTop: '10px' }} size={35}> 1 </Avatar>}
+            >
+              <CardTitle
+                subtitle="Your wallet:"
+                style={{
+                  display: 'inline-block',
+                  verticalAlign: 'top'
+                }}
+              />
+              <DropDownMenu
+                value={1}
+                onChange={() => undefined}
+              >
+                <MenuItem value={1} primaryText="MasterCard" />
+                <MenuItem value={2} primaryText="Visa" />
+                <MenuItem value={3} primaryText="Discover" />
+                <MenuItem value={4} primaryText="AmericanExpress" />
+              </DropDownMenu>
+            </ListItem>
+            <Divider />
+            <ListItem
+              leftAvatar={<Avatar style={{ marginTop: '10px' }} size={35}> 2 </Avatar>}
+              disabled
+            >
+              <RaisedButton
+                label="Apple Pay"
+                icon={<FontIcon className="muidocs-icon-custom-payment" />}
+                style={{ margin: 5 }}
+              />
+              <RaisedButton
+                label="PayPal"
+                icon={<FontIcon className="muidocs-icon-custom-payment" />}
+                style={{ margin: 5 }}
+              />
+              <RaisedButton
+                label="Amazon Pay"
+                icon={<FontIcon className="muidocs-icon-custom-payment" />}
+                style={{ margin: 5 }}
+              />
+              <CardTitle
+                subtitle="(You will be prompted to sign in to complete the payment process)"
+                style={{
+                  display: 'inline-block',
+                  verticalAlign: 'top'
+                }}
+              />
+            </ListItem>
+            <Divider />
+            <ListItem
+              leftAvatar={<Avatar style={{ marginTop: '10px' }} size={35}> 3 </Avatar>}
+              disabled
+            >
+              <RaisedButton
+                label="Visa"
+                icon={<FontIcon className="muidocs-icon-custom-payment" />}
+                style={{ margin: 5 }}
+              />
+              <RaisedButton
+                label="MasterCard"
+                icon={<FontIcon className="muidocs-icon-custom-payment" />}
+                style={{ margin: 5 }}
+              />
+              <RaisedButton
+                label="Discover"
+                icon={<FontIcon className="muidocs-icon-custom-payment" />}
+                style={{ margin: 5 }}
+              />
+              <RaisedButton
+                label="American Express"
+                icon={<FontIcon className="muidocs-icon-custom-payment" />}
+                style={{ margin: 5 }}
+              />
+              <div
+                style={{
+                  height: 100,
+                  position: 'relative',
+                  float: 'left'
+                }}
+              >
+                <TextField
+                  style={{
+                    margin: 5,
+                    width: 150,
+                  }}
+                  inputStyle={{
+                    height: 80,
+                  }}
+                  floatingLabelText="Card Number"
+                  onChange={onChange}
+                  name="ccNumber"
+                  value={fuelSavings.ccNumber}
+                  id="cc-number"
+                  type="text"
+                  className="cc-number"
+                  data-cds="ccNumber"
+                  errorText={fuelSavings.ccNumber ? "" : "This field is required."}
+                />
+              </div>
+              <div
+                style={{
+                  height: 100,
+                  position: 'relative',
+                  float: 'left'
+                }}
+              >
+                <DatePicker
+                  style={{
+                    margin: 5,
+                    display: 'inline-block'
+                  }}
+                  floatingLabelText="Expiration Date"
+                />
+              </div>
+              <div
+                style={{
+                  height: 100,
+                  position: 'relative',
+                  float: 'left'
+                }}
+              >
+                <TextField
+                  style={{
+                    margin: 5,
+                    width: 25,
+                    display: 'inline-block'
+                  }}
+                  floatingLabelText="CVV"
+                />
+              </div>
+              <Checkbox
+                label="Save this card to My Wallet"
+              />
+            </ListItem>
+            <Divider />
+            <ListItem
+              leftAvatar={<Avatar style={{ marginTop: '10px' }} size={35}> 4 </Avatar>}
+              disabled
+            >
+              <Checkbox
+                label="Bill me later"
+              />
+            </ListItem>
+          </List>
+        </Card>
+      </MuiThemeProvider>
+      <br />
+      <br />
+      <br />
       <hr />
-      <h2>Payments Widget</h2>
       <table>
         <tbody>
           <tr>
             <td><label htmlFor="ccNumber">CC Number</label></td>
             <td>
               <FuelSavingsTextInput
-                onChange={onChange}
-                name="ccNumber"
                 value={fuelSavings.ccNumber}
-                id="cc-number"
-                type="text"
-                className="cc-number"
-                data-cds="ccNumber"
-                required
               />
             </td>
           </tr>

@@ -11,6 +11,7 @@
     "start-message": "babel-node tools/startMessage.js",
     "prestart": "npm run start-message",
     "start": "concurrently -k -r -s first \"npm run test:watch\" \"npm run open:src\" \"npm run lint:watch\"",
+    "startNoTest": "concurrently -k -r -s first  \"npm run open:src\" \"npm run lint:watch\"",
     "open:src": "babel-node tools/srcServer.js",
     "open:dist": "babel-node tools/distServer.js",
     "lint": "esw webpack.config.* src tools --color",
@@ -30,6 +31,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "material-ui": "0.20.0",
     "object-assign": "4.1.0",
     "react": "16.2.0",
     "react-dom": "16.2.0",

@@ -1,6 +1,5 @@
 import React from 'react';
 import { func } from 'prop-types';
-import FuelSavingsTextInput from './FuelSavingsTextInput';
 import { fuelSavings } from '../types';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
@@ -174,75 +173,98 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) =>
           </List>
         </Card>
       </MuiThemeProvider>
-      <br />
-      <br />
-      <br />
-      <hr />
+
+      <br /> <br /> <br /> <hr />
+
+      <h4>React Lifecycle (delay of 1.25 sec)</h4>
       <table>
         <tbody>
           <tr>
             <td><label htmlFor="ccNumber">CC Number</label></td>
             <td>
-              <FuelSavingsTextInput
-                defaultValue={fuelSavings.ccNumber}
-              />
+              <div
+                style={{
+                  width: 300,
+                  textOverflow: 'ellipsis',
+                  overflow: 'hidden'
+                }}
+              >
+                {fuelSavings.ccNumber}
+              </div>
             </td>
           </tr>
           <tr>
             <td><label htmlFor="messageControlled">Message</label></td>
             <td>
-              <FuelSavingsTextInput
+              <div
+                style={{
+                  width: 300,
+                  textOverflow: 'ellipsis',
+                  overflow: 'hidden'
+                }}
                 name="message"
-                defaultValue={fuelSavings.message}
-                style={{ border: 'none' }}
                 id="messageControlled"
                 type="input"
                 data-cds="messageControlled"
-              />
+              >
+                {fuelSavings.message}
+              </div>
             </td>
           </tr>
           <tr>
             <td><label htmlFor="messageControlled">cipher</label></td>
             <td>
-              <FuelSavingsTextInput
-                name="cipher"
-                defaultValue={fuelSavings.cipher}
-                style={{ border: 'none' }}
-                id="cipherControlled"
-                type="input"
-                data-cds="cipherControlled"
-              />
+              <div
+                style={{
+                  width: 300,
+                  textOverflow: 'ellipsis',
+                  overflow: 'hidden'
+                }}
+              >
+                {fuelSavings.cipher}
+              </div>
             </td>
           </tr>
           <tr>
             <td><label htmlFor="messageControlled">cardType</label></td>
             <td>
-              <FuelSavingsTextInput
+              <div
+                style={{
+                  width: 300,
+                  textOverflow: 'ellipsis',
+                  overflow: 'hidden'
+                }}
                 name="cardType"
-                defaultValue={fuelSavings.cardType}
-                style={{ border: 'none' }}
                 id="cardTypeControlled"
                 type="input"
                 data-cds="cardTypeControlled"
-              />
+              >
+                {fuelSavings.cardType}
+              </div>
             </td>
           </tr>
           <tr>
             <td><label htmlFor="responseCodeControlled">Response Code</label></td>
             <td>
-              <FuelSavingsTextInput
+              <div
+                style={{
+                  width: 300,
+                  textOverflow: 'ellipsis',
+                  overflow: 'hidden'
+                }}
                 name="responseCode"
-                defaultValue={fuelSavings.responseCode}
-                style={{ border: 'none' }}
                 id="responseCodeControlled"
                 type="input"
                 data-cds="responseCodeControlled"
-              />
+              >
+                {fuelSavings.responseCode}
+              </div>
             </td>
           </tr>
         </tbody>
       </table>
       <hr />
+      <h4>CDS Encryption </h4>
       <table>
         <tbody>
           <tr>

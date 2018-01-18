@@ -68,7 +68,7 @@ export class PaymentsPage extends React.Component {
   }
 
   render() {
-    this.uncontrolledToControlled(2000);
+    this.uncontrolledToControlled(1250);
 
     return (
       <FuelSavingsForm

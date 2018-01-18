@@ -4,23 +4,20 @@ import PropTypes from 'prop-types';
 const FuelSavingsTextInput = (...props) => {
   return (
     <input
-    className="small"
+      className="small"
       type="text"
       {...props[0]}
     />
   );
 };
 
-const { string, func, number, oneOfType } = PropTypes;
+const { string, func } = PropTypes;
 
 FuelSavingsTextInput.propTypes = {
-  name: string.isRequired,
+  name: string,
   onChange: func,
-  placeholder: string,
-  value: oneOfType([
-    string,
-    number
-  ])
+  placeholder: string
 };
+
 
 export default FuelSavingsTextInput;

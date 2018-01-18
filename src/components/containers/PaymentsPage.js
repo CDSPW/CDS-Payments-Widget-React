@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../../actions/fuelSavingsActions';
 import FuelSavingsForm from '../FuelSavingsForm';
 
-export class FuelSavingsPage extends React.Component {
+export class PaymentsPage extends React.Component {
   componentDidMount = () => {
     this.uncontrolledToControlled(5000);
   }
@@ -42,7 +42,7 @@ export class FuelSavingsPage extends React.Component {
     setTimeout(() => {
       responseCodeInput = document.querySelector('[data-cds = "responseCode"]');
       responseCode = responseCodeInput && responseCodeInput.value;
-      //console.warn('\n\n\n FuelSavingsPage: render');
+      //console.warn('\n\n\n PaymentsPage: render');
       //console.warn(' responseCode: ', responseCodeInput);
       //console.warn(' responseCodeValue: ', responseCode);
       //console.warn(' this.props.fuelSavings: ', this.props.fuelSavings.responseCode);
@@ -80,7 +80,7 @@ export class FuelSavingsPage extends React.Component {
   }
 }
 
-FuelSavingsPage.propTypes = {
+PaymentsPage.propTypes = {
   actions: PropTypes.object.isRequired,
   fuelSavings: PropTypes.object.isRequired
 };
@@ -100,4 +100,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(FuelSavingsPage);
+)(PaymentsPage);

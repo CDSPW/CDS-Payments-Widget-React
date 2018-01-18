@@ -4,10 +4,10 @@ import FuelSavingsTextInput from './FuelSavingsTextInput';
 import { fuelSavings } from '../types';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
-import lightBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { Card, CardTitle} from 'material-ui/Card';
+import { Card, CardTitle } from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
 import Avatar from 'material-ui/Avatar';
 import List from 'material-ui/List/List';
@@ -184,7 +184,7 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) =>
             <td><label htmlFor="ccNumber">CC Number</label></td>
             <td>
               <FuelSavingsTextInput
-                value={fuelSavings.ccNumber}
+                defaultValue={fuelSavings.ccNumber}
               />
             </td>
           </tr>
@@ -193,7 +193,7 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) =>
             <td>
               <FuelSavingsTextInput
                 name="message"
-                value={fuelSavings.message}
+                defaultValue={fuelSavings.message}
                 style={{ border: 'none' }}
                 id="messageControlled"
                 type="input"
@@ -206,7 +206,7 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) =>
             <td>
               <FuelSavingsTextInput
                 name="cipher"
-                value={fuelSavings.cipher}
+                defaultValue={fuelSavings.cipher}
                 style={{ border: 'none' }}
                 id="cipherControlled"
                 type="input"
@@ -219,7 +219,7 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) =>
             <td>
               <FuelSavingsTextInput
                 name="cardType"
-                value={fuelSavings.cardType}
+                defaultValue={fuelSavings.cardType}
                 style={{ border: 'none' }}
                 id="cardTypeControlled"
                 type="input"
@@ -232,7 +232,7 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) =>
             <td>
               <FuelSavingsTextInput
                 name="responseCode"
-                value={fuelSavings.responseCode}
+                defaultValue={fuelSavings.responseCode}
                 style={{ border: 'none' }}
                 id="responseCodeControlled"
                 type="input"

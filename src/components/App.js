@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch,  Route } from 'react-router-dom';
-import FuelSavingsPage from './containers/FuelSavingsPage';
+import PaymentsPage from './containers/PaymentsPage';
 import NotFoundPage from './NotFoundPage';
 
 // This is a class-based component because the current
@@ -14,7 +14,7 @@ class App extends React.Component {
     return (
       <div>
         <Switch>
-          <Route exact path="/" component={FuelSavingsPage} />
+          <Route exact path="/" component={PaymentsPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </div>

@@ -7,39 +7,13 @@ describe('Reducers::FuelSavings', () => {
     return {
       ccNumber: '4012888888881881',
       responseCode: '',
-      newMpg: '',
-      tradeMpg: '',
-      newPpg: '',
-      tradePpg: '',
-      milesDriven: '',
-      milesDrivenTimeframe: 'week',
-      displayResults: false,
-      dateModified: null,
-      necessaryDataIsProvidedToCalculateSavings: false,
-      savings: {
-        monthly: 0,
-        annual: 0,
-        threeYear: 0
-      }
     };
   };
 
   const getAppState = () => {
     return {
-      newMpg: 20,
-      tradeMpg: 10,
-      newPpg: 1.50,
-      tradePpg: 1.50,
-      milesDriven: 100,
-      milesDrivenTimeframe: 'week',
-      displayResults: false,
-      dateModified: null,
-      necessaryDataIsProvidedToCalculateSavings: false,
-      savings: {
-        monthly: 0,
-        annual: 0,
-        threeYear: 0
-      }
+      ccNumber: '4012888888881881',
+      responseCode: '',
     };
   };
   const dateModified = getFormattedDateTime();

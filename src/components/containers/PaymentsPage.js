@@ -7,7 +7,18 @@ import FuelSavingsForm from '../FuelSavingsForm';
 
 export class PaymentsPage extends React.Component {
   componentDidMount = () => {
-    this.uncontrolledToControlled(5000);
+    this.getInitalConfig();
+    this.getCDSResponse(5000);
+  }
+  getInitalConfig = () => {
+    let datacdsgpayments = document.querySelector('[id = "data-cdsg-payments"]');
+    let initialConfig = datacdsgpayments && datacdsgpayments['attributes'];
+    if (initialConfig) {
+      initialConfig['billMe'] && this.props.actions.saveFuelSavings(this.props.fuelSavings, 'billMe', initialConfig['billMe'].value === '1' ? true : false);
+      initialConfig['yourWallet'] && this.props.actions.saveFuelSavings(this.props.fuelSavings, 'yourWallet', initialConfig['yourWallet'].value === '1' ? true : false);
+      initialConfig['payWith'] && this.props.actions.saveFuelSavings(this.props.fuelSavings, 'payWith', initialConfig['payWith'].value === '1' ? true : false);
+      initialConfig['credit'] && this.props.actions.saveFuelSavings(this.props.fuelSavings, 'credit', initialConfig['credit'].value === '1' ? true : false);
+    }
   }
   handleValidationDisplay = responseCode => {
     let logThings = message => this.props.actions.saveFuelSavings(this.props.fuelSavings, 'message', message);
@@ -37,18 +48,11 @@ export class PaymentsPage extends React.Component {
         logThings('default case');
     }
   }
-  uncontrolledToControlled = (t) => {
+  getCDSResponse = (t) => {
     let responseCodeInput, responseCode;
     setTimeout(() => {
       responseCodeInput = document.querySelector('[data-cds = "responseCode"]');
       responseCode = responseCodeInput && responseCodeInput.value;
-      //console.warn('\n\n\n PaymentsPage: render');
-      //console.warn(' responseCode: ', responseCodeInput);
-      //console.warn(' responseCodeValue: ', responseCode);
-      //console.warn(' this.props.fuelSavings: ', this.props.fuelSavings.responseCode);
-      //console.warn(' responseCode', (this.props.fuelSavings.responseCode != responseCode));
-      //console.warn(' notEqual', (this.props.fuelSavings.responseCode != responseCode));
-      //console.warn(' notEqual', this.props.fuelSavings.responseCode, responseCode);
       if (this.props.fuelSavings.responseCode != responseCode) {
         this.handleValidationDisplay(responseCode);
         this.props.actions.saveFuelSavings(this.props.fuelSavings, 'responseCode', responseCode);
@@ -68,7 +72,7 @@ export class PaymentsPage extends React.Component {
   }
 
   render() {
-    this.uncontrolledToControlled(1250);
+    this.getCDSResponse(1250);
 
     return (
       <FuelSavingsForm

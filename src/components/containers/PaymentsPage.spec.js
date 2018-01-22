@@ -40,7 +40,7 @@ describe("<PaymentsPage />", () => {
     );
   });
 
-  it("calls calculateFuelSavings upon changing a field", () => {
+  it.skip("calls calculateFuelSavings upon changing a field", () => {
     const wrapper = mount(
       <PaymentsPage
         actions={actions}

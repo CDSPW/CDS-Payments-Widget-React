@@ -1,6 +1,9 @@
 
 [<p align="center"><img src="https://codenvy.com/images/logo-codenvy-black.png"/></p>](https://codenvy.io/f?id=factorygb3ajgi8r97wzvxt)
 <p align="center">(click the CODENVY logo to launch the "factory" link)</p>
+
+<br/> <br/> <br/>
+<hr/>
 <br/> <br/> <br/>
 
 <p align="center"><img src="https://cloud.githubusercontent.com/assets/3129129/22811426/bb69dc06-ef0c-11e6-8092-a0bea9060b35.png"/></p>

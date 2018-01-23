@@ -1,3 +1,7 @@
+
+[![codeEnvy](https://codenvy.com/images/logo-codenvy-white.png)](https://codenvy.io/f?id=factorygb3ajgi8r97wzvxt)
+<br/> <br/> <br/>
+
 <p align="center"><img src="https://cloud.githubusercontent.com/assets/3129129/22811426/bb69dc06-ef0c-11e6-8092-a0bea9060b35.png"/></p>
 
 [![Build status: Linux](https://img.shields.io/travis/coryhouse/react-slingshot.svg?style=flat-square)](https://travis-ci.org/coryhouse/react-slingshot)

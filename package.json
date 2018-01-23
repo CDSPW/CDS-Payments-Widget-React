@@ -30,6 +30,8 @@
   "author": "Josh McCall",
   "license": "MIT",
   "dependencies": {
+    "card-validator": "4.2.0",
+    "intl": "1.2.5",
     "material-ui": "0.20.0",
     "object-assign": "4.1.0",
     "react": "16.2.0",

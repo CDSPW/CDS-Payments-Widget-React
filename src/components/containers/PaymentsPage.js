@@ -48,6 +48,7 @@ export class PaymentsPage extends React.Component {
         logThings('default case');
     }
   }
+  getValue = attr => document.querySelector(attr) && document.querySelector(attr).value;
   getCDSResponse = (t) => {
     let responseCodeInput, responseCode;
     setTimeout(() => {
@@ -56,9 +57,9 @@ export class PaymentsPage extends React.Component {
       if (this.props.fuelSavings.responseCode != responseCode) {
         this.handleValidationDisplay(responseCode);
         this.props.actions.saveFuelSavings(this.props.fuelSavings, 'responseCode', responseCode);
-        this.props.actions.saveFuelSavings(this.props.fuelSavings, 'cipher', document.querySelector('[data-cds = "cipher"]').value);
-        this.props.actions.saveFuelSavings(this.props.fuelSavings, 'cardType', document.querySelector('[data-cds = "cardType"]').value);
-        this.props.actions.saveFuelSavings(this.props.fuelSavings, 'ccNumber', document.querySelector('[data-cds = "ccNumber"]').value);
+        this.props.actions.saveFuelSavings(this.props.fuelSavings, 'cipher', this.getValue('[data-cds = "cipher"]'));
+        this.props.actions.saveFuelSavings(this.props.fuelSavings, 'cardType', this.getValue('[data-cds = "cardType"]'));
+        this.props.actions.saveFuelSavings(this.props.fuelSavings, 'ccNumber', this.getValue('[data-cds = "ccNumber"]'));
       }
     }, t);
 
@@ -72,7 +73,7 @@ export class PaymentsPage extends React.Component {
   }
 
   render() {
-    this.getCDSResponse(1250);
+    this.getCDSResponse(3000);
 
     return (
       <FuelSavingsForm

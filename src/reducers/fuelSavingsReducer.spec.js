@@ -5,15 +5,24 @@ import { getFormattedDateTime } from '../utils/dates';
 describe('Reducers::FuelSavings', () => {
   const getInitialState = () => {
     return {
-      ccNumber: '4012888888881881',
-      responseCode: '',
+
+    billMe: false,
+    credit: true,
+    yourWallet: false,
+    payWith: false,
+    ccNumber: '4012888888881881',
+    responseCode: '',
     };
   };
 
   const getAppState = () => {
     return {
-      ccNumber: '4012888888881881',
-      responseCode: '',
+    billMe: false,
+    credit: true,
+    yourWallet: false,
+    payWith: false,
+    ccNumber: '4012888888881881',
+    responseCode: '',
     };
   };
   const dateModified = getFormattedDateTime();

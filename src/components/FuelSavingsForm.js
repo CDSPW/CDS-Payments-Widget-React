@@ -15,11 +15,18 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
 import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
-import DatePicker from 'material-ui/DatePicker';
+import Valid from 'card-validator';
 
 
-const FuelSavingsForm = ({ fuelSavings, onChange }) =>
-  (
+const FuelSavingsForm = ({ fuelSavings, onChange }) => {
+  const { ccNumber, cvv, expDate } = fuelSavings;
+  const { card, isValid, isPotentiallyValid } = Valid.number(ccNumber);
+  const { niceType, lengths: cardLength } = card ? card : '';
+  const cvvLength = card ? card.code.size : '';
+  const { isValid: validCvv } = Valid.cvv(cvv, cvvLength);
+  const { isValid: validExpDate } = Valid.expirationDate(expDate);
+
+  return (
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
       <div>
         <br /> <br /> <br />
@@ -29,6 +36,7 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) =>
           <CardTitle title="Configuration" />
           <List>
             <ListItem
+                onClick={() => onChange({ target: { name: 'yourWallet', value: !fuelSavings.yourWallet } })}
             >
               <Checkbox
                 label="Your Wallet"
@@ -37,7 +45,9 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) =>
                 onClick={() => onChange({ target: { name: 'yourWallet', value: !fuelSavings.yourWallet } })}
               />
             </ListItem>
-            <ListItem>
+            <ListItem
+                onClick={() => onChange({ target: { name: 'payWith', value: !fuelSavings.payWith } })}
+            >
               <Checkbox
                 label="Pay with"
                 name="payWith"
@@ -45,7 +55,9 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) =>
                 onClick={() => onChange({ target: { name: 'payWith', value: !fuelSavings.payWith } })}
               />
             </ListItem>
-            <ListItem>
+            <ListItem
+                onClick={() => onChange({ target: { name: 'credit', value: !fuelSavings.credit } })}
+            >
               <Checkbox
                 label="Credit"
                 name="credit"
@@ -53,7 +65,9 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) =>
                 onClick={() => onChange({ target: { name: 'credit', value: !fuelSavings.credit } })}
               />
             </ListItem>
-            <ListItem>
+            <ListItem
+                onClick={() => onChange({ target: { name: 'billMe', value: !fuelSavings.billMe } })}
+            >
               <Checkbox
                 label="Bill me later"
                 name="billMe"
@@ -121,78 +135,105 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) =>
                     label="Visa"
                     icon={<FontIcon className="muidocs-icon-custom-payment" />}
                     style={{ margin: 5 }}
+                    disabled={niceType !== 'Visa'}
                   />
                   <RaisedButton
                     label="MasterCard"
                     icon={<FontIcon className="muidocs-icon-custom-payment" />}
                     style={{ margin: 5 }}
+                    disabled={niceType !== 'MasterCard'}
                   />
                   <RaisedButton
                     label="Discover"
                     icon={<FontIcon className="muidocs-icon-custom-payment" />}
                     style={{ margin: 5 }}
+                    disabled={niceType !== 'Discover'}
                   />
                   <RaisedButton
                     label="American Express"
                     icon={<FontIcon className="muidocs-icon-custom-payment" />}
                     style={{ margin: 5 }}
+                    disabled={niceType !== 'AmericanExpress'}
                   />
                   <div
                     style={{
-                      height: 100,
-                      position: 'relative',
-                      float: 'left'
+                      //height: 100,
+                      //position: 'relative',
+                      //float: 'left'
                     }}
                   >
                     <TextField
                       style={{
-                        margin: 5,
-                        width: 150,
+                        //margin: 5,
+                        width: '75%',
                       }}
                       inputStyle={{
-                        height: 80,
+                        // height: 80,
                       }}
                       floatingLabelText="Card Number"
-                      onChange={onChange}
+                      onChange={(e, value) => onChange({ target: { name: 'ccNumber', value } })}
+                      value={ccNumber}
                       name="ccNumber"
-                      value={fuelSavings.ccNumber}
                       id="cc-number"
-                      type="text"
                       className="cc-number"
                       data-cds="ccNumber"
-                      errorText={fuelSavings.ccNumber ? "" : "This field is required."}
+                      errorText={
+                        (() => {
+                          if (ccNumber !== "" && !isValid)
+                            return "This field is required. " + niceType + " cards must be " + cardLength + " long.";
+                        })()
+                      }
                     />
                   </div>
                   <div
                     style={{
-                      height: 100,
-                      position: 'relative',
-                      float: 'left'
-                    }}
-                  >
-                    <DatePicker
-                      style={{
-                        margin: 5,
-                        display: 'inline-block'
-                      }}
-                      floatingLabelText="Expiration Date"
-                    />
-                  </div>
-                  <div
-                    style={{
-                      height: 100,
-                      position: 'relative',
-                      float: 'left'
+                      //height: 100,
+                      //position: 'relative',
+                      //float: 'left'
                     }}
                   >
                     <TextField
+                      onChange={(e, expDateValue) => onChange({ target: { name: 'expDate', value: expDateValue } })}
+                      name="expDate"
+                      value={expDate}
                       style={{
-                        margin: 5,
-                        width: 25,
-                        display: 'inline-block'
+                        //margin: 5,
+                        // display: 'inline-block'
+                      }}
+                      floatingLabelText="Expiration Date"
+                      hintText="MM/YY"
+                      errorText={
+                        (() => {
+                          if (ccNumber !== "" && !validExpDate)
+                            return "This field is required. ";
+                        })()
+                      }
+                    />
+                  </div>
+                  <div
+                  //style={{
+                  //  height: 100,
+                  //  position: 'relative',
+                  //  float: 'left'
+                  //}}
+                  >
+                    <TextField
+                      style={{
+                        //margin: 5,
+                        //width: 25,
+                        //display: 'inline-block'
                       }}
                       floatingLabelText="CVV"
+                      name="cvv"
+                      onChange={onChange}
+                      value={cvv}
+                      errorText={
+                        (() => {
+                          if (ccNumber !== "" && !validCvv) return niceType ? "not valid..."+niceType+" requires "+cvvLength +" digits.":"not valid...";
+                        })()
+                      }
                     />
+                    <br /><br />
                   </div>
                   <Checkbox
                     label="Save this card to My Wallet"
@@ -208,13 +249,13 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) =>
               ]
                 .filter(f => f)
                 .map((e, index) =>
-                  ( <ListItem
-                      leftAvatar={<Avatar style={{ marginTop: '10px' }} size={35}> {index + 1} </Avatar>}
-                      disabled
-                      key={index}
-                    >
-                      {e}
-                    </ListItem>)
+                  (<ListItem
+                    leftAvatar={<Avatar style={{ marginTop: '10px' }} size={35}> {index + 1} </Avatar>}
+                    disabled
+                    key={index}
+                  >
+                    {e}
+                  </ListItem>)
                 )
             }
           </List>
@@ -224,20 +265,56 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) =>
         <Card
           style={{ width: 650 }}
         >
-          <CardTitle title="React Lifecycle (delay of 1.25 sec)" />
+          <CardTitle title="Card-Validator" subtitle="4012888888881881" />
+          <table>
+            <tbody>
+              <tr>
+                <td><label >card.type: </label></td>
+                <td>
+                  <div style={{ width: 300, textOverflow: 'ellipsis', overflow: 'hidden' }} >
+                    {niceType}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><label >isPotentiallyValid: </label></td>
+                <td>
+                  <div style={{ width: 300, textOverflow: 'ellipsis', overflow: 'hidden' }} >
+
+                    {isPotentiallyValid.toString()}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><label >isValid: </label></td>
+                <td>
+                  <div style={{ width: 300, textOverflow: 'ellipsis', overflow: 'hidden' }} >
+
+                    {isValid.toString()}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><label >validCvv: </label></td>
+                <td>
+                  <div style={{ width: 300, textOverflow: 'ellipsis', overflow: 'hidden' }} >
+                    {validCvv.toString()}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <hr />
+          <CardTitle title="React Lifecycle (delay of 3 sec)" />
           <table>
             <tbody>
               <tr>
                 <td><label htmlFor="ccNumber">CC Number</label></td>
                 <td>
                   <div
-                    style={{
-                      width: 300,
-                      textOverflow: 'ellipsis',
-                      overflow: 'hidden'
-                    }}
+                    style={{ width: 300, textOverflow: 'ellipsis', overflow: 'hidden' }}
                   >
-                    {fuelSavings.ccNumber}
+                    {ccNumber}
                   </div>
                 </td>
               </tr>
@@ -316,6 +393,17 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) =>
           <table>
             <tbody>
               <tr>
+                <td><label htmlFor="ccNumber">ccNumber</label></td>
+                <td>
+                  <input
+                    style={{ border: 'none' }}
+                    placeholder="ccNumber"
+                    value={ccNumber}
+                    readOnly
+                  />
+                </td>
+              </tr>
+              <tr>
                 <td><label htmlFor="cipher">Cipher</label></td>
                 <td>
                   <input
@@ -363,7 +451,7 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) =>
       </div>
     </MuiThemeProvider>
   );
-
+};
 FuelSavingsForm.propTypes = {
   onSaveClick: func.isRequired,
   onChange: func.isRequired,

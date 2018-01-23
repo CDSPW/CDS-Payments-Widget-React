@@ -4,5 +4,6 @@ unset npm_config_prefix
  . ~/.nvm/nvm.sh
  nvm i
  nvm use
- npm i
+ npm i -g yarn
+ yarn
  npm run start

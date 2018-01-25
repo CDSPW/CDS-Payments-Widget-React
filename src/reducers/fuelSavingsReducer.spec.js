@@ -10,7 +10,7 @@ describe('Reducers::FuelSavings', () => {
     credit: true,
     yourWallet: false,
     payWith: false,
-    ccNumber: '4012888888881881',
+    ccNumber: '',
     responseCode: '',
     };
   };
@@ -21,7 +21,7 @@ describe('Reducers::FuelSavings', () => {
     credit: true,
     yourWallet: false,
     payWith: false,
-    ccNumber: '4012888888881881',
+    ccNumber: '',
     responseCode: '',
     };
   };

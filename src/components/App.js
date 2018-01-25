@@ -12,10 +12,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Switch>
+        <PaymentsPage />
+        {false && <Switch>
           <Route exact path="/" component={PaymentsPage} />
           <Route component={PaymentsPage} />
-        </Switch>
+        </Switch>}
       </div>
     );
   }

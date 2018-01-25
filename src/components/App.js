@@ -1,7 +1,7 @@
 /* eslint-disable import/no-named-as-default */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Switch,  Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import PaymentsPage from './containers/PaymentsPage';
 
 // This is a class-based component because the current
@@ -10,6 +10,8 @@ import PaymentsPage from './containers/PaymentsPage';
 
 class App extends React.Component {
   render() {
+    const appProps = this.props;
+    console.log({ appProps })
     return (
       <div>
         <PaymentsPage />

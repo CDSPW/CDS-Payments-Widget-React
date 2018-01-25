@@ -83,6 +83,7 @@ export class PaymentsPage extends React.Component {
         onSaveClick={this.saveFuelSavings}
         onChange={this.calculateFuelSavings}
         fuelSavings={this.props.fuelSavings}
+        routing={this.props.routing}
       />
     );
   }
@@ -95,7 +96,8 @@ PaymentsPage.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    fuelSavings: state.fuelSavings
+    fuelSavings: state.fuelSavings,
+    routing:state.routing
   };
 }
 

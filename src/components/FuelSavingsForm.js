@@ -36,7 +36,8 @@ const FuelSavingsForm = (
     payWith,
     yourWallet,
   },
-    onChange
+    onChange,
+    routing
 }) => {
   //const { billMe, ccNumber, credit, cvv, expDate, payWith, yourWallet, } = fuelSavings;
   const { card, isValid, isPotentiallyValid } = Valid.number(ccNumber);
@@ -45,6 +46,7 @@ const FuelSavingsForm = (
   const { isValid: validCvv } = Valid.cvv(cvv, cvvLength);
   const { isValid: validExpDate } = Valid.expirationDate(expDate);
 
+  console.log({routing});
   return (
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
       <div>

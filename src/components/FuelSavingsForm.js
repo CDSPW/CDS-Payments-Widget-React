@@ -36,7 +36,7 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) => {
           <CardTitle title="Configuration" />
           <List>
             <ListItem
-                onClick={() => onChange({ target: { name: 'yourWallet', value: !fuelSavings.yourWallet } })}
+              onClick={() => onChange({ target: { name: 'yourWallet', value: !fuelSavings.yourWallet } })}
             >
               <Checkbox
                 label="Your Wallet"
@@ -46,7 +46,7 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) => {
               />
             </ListItem>
             <ListItem
-                onClick={() => onChange({ target: { name: 'payWith', value: !fuelSavings.payWith } })}
+              onClick={() => onChange({ target: { name: 'payWith', value: !fuelSavings.payWith } })}
             >
               <Checkbox
                 label="Pay with"
@@ -56,7 +56,7 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) => {
               />
             </ListItem>
             <ListItem
-                onClick={() => onChange({ target: { name: 'credit', value: !fuelSavings.credit } })}
+              onClick={() => onChange({ target: { name: 'credit', value: !fuelSavings.credit } })}
             >
               <Checkbox
                 label="Credit"
@@ -66,7 +66,7 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) => {
               />
             </ListItem>
             <ListItem
-                onClick={() => onChange({ target: { name: 'billMe', value: !fuelSavings.billMe } })}
+              onClick={() => onChange({ target: { name: 'billMe', value: !fuelSavings.billMe } })}
             >
               <Checkbox
                 label="Bill me later"
@@ -229,15 +229,15 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) => {
                       value={cvv}
                       errorText={
                         (() => {
-                          if (ccNumber !== "" && !validCvv) return niceType ? "not valid..."+niceType+" requires "+cvvLength +" digits.":"not valid...";
+                          if (ccNumber !== "" && !validCvv) return niceType ? "not valid..." + niceType + " requires " + cvvLength + " digits." : "not valid...";
                         })()
                       }
                     />
                     <br /><br />
                   </div>
-                  <Checkbox
+                  {fuelSavings.yourWallet && <Checkbox
                     label="Save this card to My Wallet"
-                  />
+                  />}
                 </div>,
                 fuelSavings.billMe && <div>
                   <Divider />
@@ -248,9 +248,12 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) => {
                 </div>
               ]
                 .filter(f => f)
-                .map((e, index) =>
+                .map((e, index, options) =>
                   (<ListItem
-                    leftAvatar={<Avatar style={{ marginTop: '10px' }} size={35}> {index + 1} </Avatar>}
+                    leftAvatar={(options.length > 1) && <Avatar style={{ marginTop: '10px' }} size={35}>
+                      {options.length > 1 ? index + 1 : ''}
+                      {console.log("\n\n\n", { options }, "\n\n", options.length)}
+                    </Avatar>}
                     disabled
                     key={index}
                   >

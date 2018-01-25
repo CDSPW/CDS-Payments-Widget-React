@@ -6,7 +6,11 @@ import App from './App';
 
 export default class Root extends Component {
   render() {
-    const { store, history } = this.props;
+    const { store, history} = this.props;
+    console.log(
+      "\n\n\n",
+      {history},
+    )
     return (
       <Provider store={store}>
         <ConnectedRouter history={history}>

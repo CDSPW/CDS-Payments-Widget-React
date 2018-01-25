@@ -6,7 +6,14 @@ import MenuItem from 'material-ui/MenuItem';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { Card, CardTitle } from 'material-ui/Card';
+import {
+  Card,
+  CardActions,
+  CardHeader,
+  CardMedia,
+  CardText,
+  CardTitle,
+} from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
 import Avatar from 'material-ui/Avatar';
 import List from 'material-ui/List/List';
@@ -17,11 +24,25 @@ import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
 import Valid from 'card-validator';
 import Drawer from 'material-ui/Drawer';
+import FlatButton from 'material-ui/FlatButton';
 
 
-
-const FuelSavingsForm = ({ fuelSavings, onChange }) => {
-  const { ccNumber, cvv, expDate } = fuelSavings;
+const FuelSavingsForm = (
+  {
+  fuelSavings: {
+    billMe,
+    ccNumber,
+    credit,
+    cvv,
+    cvvToggle,
+    expDate,
+    message,
+    payWith,
+    yourWallet,
+  },
+    onChange
+}) => {
+  //const { billMe, ccNumber, credit, cvv, expDate, payWith, yourWallet, } = fuelSavings;
   const { card, isValid, isPotentiallyValid } = Valid.number(ccNumber);
   const { niceType, lengths: cardLength } = card ? card : '';
   const cvvLength = card ? card.code.size : '';
@@ -31,8 +52,6 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) => {
   return (
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
       <div>
-        <br /> <br /> <br />
-        <br /> <br /> <br />
         <Card
           style={{ width: 650 }}
         >
@@ -40,7 +59,7 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) => {
           <List>
             {
               [
-                fuelSavings.yourWallet &&
+                yourWallet &&
                 <div>
                   <CardTitle
                     subtitle="Your wallet:"
@@ -60,7 +79,7 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) => {
                   </DropDownMenu>
                   <Divider />
                 </div>,
-                fuelSavings.payWith && <div>
+                payWith && <div>
                   <RaisedButton
                     label="Apple Pay"
                     icon={<FontIcon className="muidocs-icon-custom-payment" />}
@@ -85,7 +104,7 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) => {
                   />
                   <Divider />
                 </div>,
-                fuelSavings.credit && <div>
+                credit && <div>
                   <RaisedButton
                     label="Visa"
                     icon={<FontIcon className="muidocs-icon-custom-payment" />}
@@ -165,36 +184,28 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) => {
                       }
                     />
                   </div>
-                  <div
-                  //style={{
-                  //  height: 100,
-                  //  position: 'relative',
-                  //  float: 'left'
-                  //}}
-                  >
-                    <TextField
-                      style={{
-                        //margin: 5,
-                        //width: 25,
-                        //display: 'inline-block'
-                      }}
-                      floatingLabelText="CVV"
-                      name="cvv"
-                      onChange={onChange}
-                      value={cvv}
-                      errorText={
-                        (() => {
-                          if (ccNumber !== "" && !validCvv) return niceType ? "not valid..." + niceType + " requires " + cvvLength + " digits." : "not valid...";
-                        })()
-                      }
-                    />
-                    <br /><br />
-                  </div>
-                  {fuelSavings.yourWallet && <Checkbox
+                  {cvvToggle && <TextField
+                    style={{
+                      //margin: 5,
+                      //width: 25,
+                      //display: 'inline-block'
+                    }}
+                    floatingLabelText="CVV"
+                    name="cvv"
+                    onChange={onChange}
+                    value={cvv}
+                    errorText={
+                      (() => {
+                        if (ccNumber !== "" && !validCvv) return niceType ? "not valid..." + niceType + " requires " + cvvLength + " digits." : "not valid...";
+                      })()
+                    }
+                  />}
+                  <br /><br />
+                  {yourWallet && <Checkbox
                     label="Save this card to My Wallet"
                   />}
                 </div>,
-                fuelSavings.billMe && <div>
+                billMe && <div>
                   <Divider />
                   <br /> <br />
                   <Checkbox
@@ -203,11 +214,14 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) => {
                 </div>
               ]
                 .filter(f => f)
+                .filter((option, index, options) =>  {
+                  if (options.length === 1 && billMe) return false;
+                  return option;
+                })
                 .map((e, index, options) =>
                   (<ListItem
                     leftAvatar={(options.length > 1) && <Avatar style={{ marginTop: '10px' }} size={35}>
                       {options.length > 1 ? index + 1 : ''}
-                      {console.log("\n\n\n", { options }, "\n\n", options.length)}
                     </Avatar>}
                     disabled
                     key={index}
@@ -228,43 +242,75 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) => {
             <CardTitle title="Configuration" />
             <List>
               <ListItem
-                onClick={() => onChange({ target: { name: 'yourWallet', value: !fuelSavings.yourWallet } })}
+                onClick={() => onChange({ target: { name: 'yourWallet', value: !yourWallet } })}
               >
                 <Checkbox
                   label="Your Wallet"
                   name="yourWallet"
-                  checked={fuelSavings.yourWallet}
-                  onClick={() => onChange({ target: { name: 'yourWallet', value: !fuelSavings.yourWallet } })}
+                  checked={yourWallet}
+                  onClick={() => onChange({ target: { name: 'yourWallet', value: !yourWallet } })}
                 />
               </ListItem>
               <ListItem
-                onClick={() => onChange({ target: { name: 'payWith', value: !fuelSavings.payWith } })}
+                onClick={() => onChange({ target: { name: 'payWith', value: !payWith } })}
               >
                 <Checkbox
                   label="Pay with"
                   name="payWith"
-                  checked={fuelSavings.payWith}
-                  onClick={() => onChange({ target: { name: 'payWith', value: !fuelSavings.payWith } })}
+                  checked={payWith}
+                  onClick={() => onChange({ target: { name: 'payWith', value: !payWith } })}
                 />
               </ListItem>
               <ListItem
-                onClick={() => onChange({ target: { name: 'credit', value: !fuelSavings.credit } })}
+                onClick={() => onChange({ target: { name: 'credit', value: !credit } })}
               >
                 <Checkbox
                   label="Credit"
                   name="credit"
-                  checked={fuelSavings.credit}
-                  onClick={() => onChange({ target: { name: 'credit', value: !fuelSavings.credit } })}
+                  checked={credit}
                 />
               </ListItem>
               <ListItem
-                onClick={() => onChange({ target: { name: 'billMe', value: !fuelSavings.billMe } })}
+                onClick={() => onChange({ target: { name: 'cvvToggle', value: !cvvToggle } })}
               >
                 <Checkbox
+                  label="CVV"
+                  checked={cvvToggle}
+                  style={{ paddingLeft: 20 }}
+                />
+              </ListItem>
+              <ListItem onClick={() => onChange({ target: { name: 'billMe', value: !billMe } })} >
+                <Checkbox
                   label="Bill me later"
-                  name="billMe"
-                  checked={fuelSavings.billMe}
-                  onClick={() => onChange({ target: { name: 'billMe', value: !fuelSavings.billMe } })}
+                  checked={billMe}
+                />
+              </ListItem>
+            </List>
+          </Card>
+          <br /> <br /> <br />
+          <Card
+          >
+            <CardTitle title="Demo" />
+            <List>
+              <ListItem
+
+                onClick={() => {
+                  onChange({ target: { name: 'ccNumber', value: (ccNumber === '4012888888881881') ? '' : '4012888888881881' } });
+                }}
+              >
+                <Checkbox
+                  label="Visa: 4012888888881881"
+                  checked={(ccNumber === '4012888888881881')}
+                />
+              </ListItem>
+              <ListItem
+                onClick={() => {
+                  onChange({ target: { name: 'ccNumber', value: (ccNumber === '6011') ? '' : '6011' } });
+                }}
+              >
+                <Checkbox
+                  label="Visa: 6011"
+                  checked={(ccNumber === '6011')}
                 />
               </ListItem>
             </List>
@@ -340,7 +386,7 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) => {
                       type="input"
                       data-cds="messageControlled"
                     >
-                      {fuelSavings.message}
+                      {message}
                     </div>
                   </td>
                 </tr>

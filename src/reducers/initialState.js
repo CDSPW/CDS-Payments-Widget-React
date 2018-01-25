@@ -4,7 +4,7 @@ export default {
     credit: true,
     yourWallet: false,
     payWith: false,
-    ccNumber: '',
+    ccNumber: '4012888888881881',
     responseCode: '',
   }
 };

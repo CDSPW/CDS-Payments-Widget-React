@@ -13,11 +13,13 @@ export class PaymentsPage extends React.Component {
   getInitalConfig = () => {
     let datacdsgpayments = document.querySelector('[id = "data-cdsg-payments"]');
     let initialConfig = datacdsgpayments && datacdsgpayments['attributes'];
+    let { fuelsavings } = this.props;
     if (initialConfig) {
-      initialConfig['billMe'] && this.props.actions.saveFuelSavings(this.props.fuelSavings, 'billMe', initialConfig['billMe'].value === '1' ? true : false);
-      initialConfig['yourWallet'] && this.props.actions.saveFuelSavings(this.props.fuelSavings, 'yourWallet', initialConfig['yourWallet'].value === '1' ? true : false);
-      initialConfig['payWith'] && this.props.actions.saveFuelSavings(this.props.fuelSavings, 'payWith', initialConfig['payWith'].value === '1' ? true : false);
-      initialConfig['credit'] && this.props.actions.saveFuelSavings(this.props.fuelSavings, 'credit', initialConfig['credit'].value === '1' ? true : false);
+      initialConfig['billMe'] && this.props.actions.saveFuelSavings(fuelsavings, 'billMe', initialConfig['billMe'].value === '1' ? true : false);
+      initialConfig['yourWallet'] && this.props.actions.saveFuelSavings(fuelsavings, 'yourWallet', initialConfig['yourWallet'].value === '1' ? true : false);
+      initialConfig['payWith'] && this.props.actions.saveFuelSavings(fuelsavings, 'payWith', initialConfig['payWith'].value === '1' ? true : false);
+      initialConfig['credit'] && this.props.actions.saveFuelSavings(fuelsavings, 'credit', initialConfig['credit'].value === '1' ? true : false);
+      initialConfig['cvv'] && this.props.actions.saveFuelSavings(fuelsavings, 'cvvToggle', initialConfig['cvv'].value === '1' ? true : false);
     }
   }
   handleValidationDisplay = responseCode => {

@@ -16,6 +16,8 @@ import FontIcon from 'material-ui/FontIcon';
 import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
 import Valid from 'card-validator';
+import Drawer from 'material-ui/Drawer';
+
 
 
 const FuelSavingsForm = ({ fuelSavings, onChange }) => {
@@ -29,54 +31,243 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) => {
   return (
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
       <div>
-        <br /> <br /> <br />
-        <Card
-          style={{ width: 650 }}
+        <Drawer
+          open
         >
-          <CardTitle title="Configuration" />
-          <List>
-            <ListItem
-              onClick={() => onChange({ target: { name: 'yourWallet', value: !fuelSavings.yourWallet } })}
-            >
-              <Checkbox
-                label="Your Wallet"
-                name="yourWallet"
-                checked={fuelSavings.yourWallet}
+          <Card
+          >
+            <CardTitle title="Configuration" />
+            <List>
+              <ListItem
                 onClick={() => onChange({ target: { name: 'yourWallet', value: !fuelSavings.yourWallet } })}
-              />
-            </ListItem>
-            <ListItem
-              onClick={() => onChange({ target: { name: 'payWith', value: !fuelSavings.payWith } })}
-            >
-              <Checkbox
-                label="Pay with"
-                name="payWith"
-                checked={fuelSavings.payWith}
+              >
+                <Checkbox
+                  label="Your Wallet"
+                  name="yourWallet"
+                  checked={fuelSavings.yourWallet}
+                  onClick={() => onChange({ target: { name: 'yourWallet', value: !fuelSavings.yourWallet } })}
+                />
+              </ListItem>
+              <ListItem
                 onClick={() => onChange({ target: { name: 'payWith', value: !fuelSavings.payWith } })}
-              />
-            </ListItem>
-            <ListItem
-              onClick={() => onChange({ target: { name: 'credit', value: !fuelSavings.credit } })}
-            >
-              <Checkbox
-                label="Credit"
-                name="credit"
-                checked={fuelSavings.credit}
+              >
+                <Checkbox
+                  label="Pay with"
+                  name="payWith"
+                  checked={fuelSavings.payWith}
+                  onClick={() => onChange({ target: { name: 'payWith', value: !fuelSavings.payWith } })}
+                />
+              </ListItem>
+              <ListItem
                 onClick={() => onChange({ target: { name: 'credit', value: !fuelSavings.credit } })}
-              />
-            </ListItem>
-            <ListItem
-              onClick={() => onChange({ target: { name: 'billMe', value: !fuelSavings.billMe } })}
-            >
-              <Checkbox
-                label="Bill me later"
-                name="billMe"
-                checked={fuelSavings.billMe}
+              >
+                <Checkbox
+                  label="Credit"
+                  name="credit"
+                  checked={fuelSavings.credit}
+                  onClick={() => onChange({ target: { name: 'credit', value: !fuelSavings.credit } })}
+                />
+              </ListItem>
+              <ListItem
                 onClick={() => onChange({ target: { name: 'billMe', value: !fuelSavings.billMe } })}
-              />
-            </ListItem>
-          </List>
-        </Card>
+              >
+                <Checkbox
+                  label="Bill me later"
+                  name="billMe"
+                  checked={fuelSavings.billMe}
+                  onClick={() => onChange({ target: { name: 'billMe', value: !fuelSavings.billMe } })}
+                />
+              </ListItem>
+            </List>
+          </Card>
+          <br /> <br /> <br />
+          <Card
+            style={{ width: 650 }}
+          >
+            <CardTitle title="Card-Validator" subtitle="4012888888881881" />
+            <table>
+              <tbody>
+                <tr>
+                  <td><label >card.type: </label></td>
+                  <td>
+                    <div style={{ width: 300, textOverflow: 'ellipsis', overflow: 'hidden' }} >
+                      {niceType}
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><label >isPotentiallyValid: </label></td>
+                  <td>
+                    <div style={{ width: 300, textOverflow: 'ellipsis', overflow: 'hidden' }} >
+
+                      {isPotentiallyValid.toString()}
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><label >isValid: </label></td>
+                  <td>
+                    <div style={{ width: 300, textOverflow: 'ellipsis', overflow: 'hidden' }} >
+
+                      {isValid.toString()}
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><label >validCvv: </label></td>
+                  <td>
+                    <div style={{ width: 300, textOverflow: 'ellipsis', overflow: 'hidden' }} >
+                      {validCvv.toString()}
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <hr />
+            <CardTitle title="React Lifecycle (delay of 3 sec)" />
+            <table>
+              <tbody>
+                <tr>
+                  <td><label htmlFor="ccNumber">CC Number</label></td>
+                  <td>
+                    <div
+                      style={{ width: 300, textOverflow: 'ellipsis', overflow: 'hidden' }}
+                    >
+                      {ccNumber}
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><label htmlFor="messageControlled">Message</label></td>
+                  <td>
+                    <div
+                      style={{
+                        width: 300,
+                        textOverflow: 'ellipsis',
+                        overflow: 'hidden'
+                      }}
+                      name="message"
+                      id="messageControlled"
+                      type="input"
+                      data-cds="messageControlled"
+                    >
+                      {fuelSavings.message}
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><label htmlFor="messageControlled">cipher</label></td>
+                  <td>
+                    <div
+                      style={{
+                        width: 300,
+                        textOverflow: 'ellipsis',
+                        overflow: 'hidden'
+                      }}
+                    >
+                      {fuelSavings.cipher}
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><label htmlFor="messageControlled">cardType</label></td>
+                  <td>
+                    <div
+                      style={{
+                        width: 300,
+                        textOverflow: 'ellipsis',
+                        overflow: 'hidden'
+                      }}
+                      name="cardType"
+                      id="cardTypeControlled"
+                      type="input"
+                      data-cds="cardTypeControlled"
+                    >
+                      {fuelSavings.cardType}
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><label htmlFor="responseCodeControlled">Response Code</label></td>
+                  <td>
+                    <div
+                      style={{
+                        width: 300,
+                        textOverflow: 'ellipsis',
+                        overflow: 'hidden'
+                      }}
+                      name="responseCode"
+                      id="responseCodeControlled"
+                      type="input"
+                      data-cds="responseCodeControlled"
+                    >
+                      {fuelSavings.responseCode}
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <hr />
+            <CardTitle title="CDS Encryption " />
+            <table>
+              <tbody>
+                <tr>
+                  <td><label htmlFor="ccNumber">ccNumber</label></td>
+                  <td>
+                    <input
+                      style={{ border: 'none' }}
+                      placeholder="ccNumber"
+                      value={ccNumber}
+                      readOnly
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td><label htmlFor="cipher">Cipher</label></td>
+                  <td>
+                    <input
+                      style={{ border: 'none' }}
+                      id="cipher"
+                      type="input"
+                      placeholder="Cipher"
+                      data-cds="cipher"
+                      readOnly
+                      disabled
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td><label htmlFor="cardType">Card Type</label></td>
+                  <td>
+                    <input
+                      style={{ border: 'none' }}
+                      id="cardType"
+                      type="input"
+                      placeholder="Card Type"
+                      data-cds="cardType"
+                      readOnly
+                      disabled
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td><label htmlFor="responseCode">Response Code</label></td>
+                  <td>
+                    <input
+                      name="responseCode"
+                      style={{ border: 'none' }}
+                      id="responseCode"
+                      type="input"
+                      data-cds="responseCode"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </Card>
+        </Drawer>
+        <br /> <br /> <br />
         <br /> <br /> <br />
         <Card
           style={{ width: 650 }}
@@ -264,192 +455,6 @@ const FuelSavingsForm = ({ fuelSavings, onChange }) => {
           </List>
         </Card>
 
-        <br /> <br /> <br />
-        <Card
-          style={{ width: 650 }}
-        >
-          <CardTitle title="Card-Validator" subtitle="4012888888881881" />
-          <table>
-            <tbody>
-              <tr>
-                <td><label >card.type: </label></td>
-                <td>
-                  <div style={{ width: 300, textOverflow: 'ellipsis', overflow: 'hidden' }} >
-                    {niceType}
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td><label >isPotentiallyValid: </label></td>
-                <td>
-                  <div style={{ width: 300, textOverflow: 'ellipsis', overflow: 'hidden' }} >
-
-                    {isPotentiallyValid.toString()}
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td><label >isValid: </label></td>
-                <td>
-                  <div style={{ width: 300, textOverflow: 'ellipsis', overflow: 'hidden' }} >
-
-                    {isValid.toString()}
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td><label >validCvv: </label></td>
-                <td>
-                  <div style={{ width: 300, textOverflow: 'ellipsis', overflow: 'hidden' }} >
-                    {validCvv.toString()}
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <hr />
-          <CardTitle title="React Lifecycle (delay of 3 sec)" />
-          <table>
-            <tbody>
-              <tr>
-                <td><label htmlFor="ccNumber">CC Number</label></td>
-                <td>
-                  <div
-                    style={{ width: 300, textOverflow: 'ellipsis', overflow: 'hidden' }}
-                  >
-                    {ccNumber}
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td><label htmlFor="messageControlled">Message</label></td>
-                <td>
-                  <div
-                    style={{
-                      width: 300,
-                      textOverflow: 'ellipsis',
-                      overflow: 'hidden'
-                    }}
-                    name="message"
-                    id="messageControlled"
-                    type="input"
-                    data-cds="messageControlled"
-                  >
-                    {fuelSavings.message}
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td><label htmlFor="messageControlled">cipher</label></td>
-                <td>
-                  <div
-                    style={{
-                      width: 300,
-                      textOverflow: 'ellipsis',
-                      overflow: 'hidden'
-                    }}
-                  >
-                    {fuelSavings.cipher}
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td><label htmlFor="messageControlled">cardType</label></td>
-                <td>
-                  <div
-                    style={{
-                      width: 300,
-                      textOverflow: 'ellipsis',
-                      overflow: 'hidden'
-                    }}
-                    name="cardType"
-                    id="cardTypeControlled"
-                    type="input"
-                    data-cds="cardTypeControlled"
-                  >
-                    {fuelSavings.cardType}
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td><label htmlFor="responseCodeControlled">Response Code</label></td>
-                <td>
-                  <div
-                    style={{
-                      width: 300,
-                      textOverflow: 'ellipsis',
-                      overflow: 'hidden'
-                    }}
-                    name="responseCode"
-                    id="responseCodeControlled"
-                    type="input"
-                    data-cds="responseCodeControlled"
-                  >
-                    {fuelSavings.responseCode}
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <hr />
-          <CardTitle title="CDS Encryption " />
-          <table>
-            <tbody>
-              <tr>
-                <td><label htmlFor="ccNumber">ccNumber</label></td>
-                <td>
-                  <input
-                    style={{ border: 'none' }}
-                    placeholder="ccNumber"
-                    value={ccNumber}
-                    readOnly
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td><label htmlFor="cipher">Cipher</label></td>
-                <td>
-                  <input
-                    style={{ border: 'none' }}
-                    id="cipher"
-                    type="input"
-                    placeholder="Cipher"
-                    data-cds="cipher"
-                    readOnly
-                    disabled
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td><label htmlFor="cardType">Card Type</label></td>
-                <td>
-                  <input
-                    style={{ border: 'none' }}
-                    id="cardType"
-                    type="input"
-                    placeholder="Card Type"
-                    data-cds="cardType"
-                    readOnly
-                    disabled
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td><label htmlFor="responseCode">Response Code</label></td>
-                <td>
-                  <input
-                    name="responseCode"
-                    style={{ border: 'none' }}
-                    id="responseCode"
-                    type="input"
-                    data-cds="responseCode"
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-        </Card>
         <br /> <br /> <br />
       </div>
     </MuiThemeProvider>

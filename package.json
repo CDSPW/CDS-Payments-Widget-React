@@ -26,7 +26,7 @@
     "test:watch": "jest --watch",
     "open:cover": "npm run test:cover && opn ./coverage/lcov-report/index.html",
     "analyze-bundle": "babel-node ./tools/analyzeBundle.js",
-    "deploy": "babel-node tools/build.js && surge --domain cds-payments.surge.sh ./dist"
+    "deploy": "npm run prebuild && babel-node tools/build.js && surge --domain cds-payments.surge.sh ./dist"
 
   },
   "author": "Josh McCall",

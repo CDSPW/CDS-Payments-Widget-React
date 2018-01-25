@@ -8,10 +8,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {
   Card,
-  CardActions,
-  CardHeader,
-  CardMedia,
-  CardText,
   CardTitle,
 } from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
@@ -24,7 +20,6 @@ import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
 import Valid from 'card-validator';
 import Drawer from 'material-ui/Drawer';
-import FlatButton from 'material-ui/FlatButton';
 
 
 const FuelSavingsForm = (

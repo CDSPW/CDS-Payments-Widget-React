@@ -46,7 +46,7 @@ const FuelSavingsForm = (
   const { isValid: validCvv } = Valid.cvv(cvv, cvvLength);
   const { isValid: validExpDate } = Valid.expirationDate(expDate);
 
-  console.log({routing});
+  console.log('\n\n\n',{routing})
   return (
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
       <div>

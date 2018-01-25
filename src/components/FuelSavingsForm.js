@@ -55,7 +55,7 @@ const FuelSavingsForm = (
         <Card
           style={{ width: 650 }}
         >
-          <CardTitle title="Choose your preferred payment option:" />
+          {false && <CardTitle title="Choose your preferred payment option:" />}
           <List>
             {
               [

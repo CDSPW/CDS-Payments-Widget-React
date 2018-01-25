@@ -30,6 +30,7 @@ const FuelSavingsForm = (
     credit,
     cvv,
     cvvToggle,
+    demo,
     expDate,
     message,
     payWith,
@@ -230,7 +231,7 @@ const FuelSavingsForm = (
 
         <br /> <br /> <br />
         <Drawer
-          open
+          open={demo}
         >
           <Card
           >

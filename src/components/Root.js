@@ -10,7 +10,7 @@ export default class Root extends Component {
     console.log(
       "\n\n\n",
       {history},
-    )
+    );
     return (
       <Provider store={store}>
         <ConnectedRouter history={history}>

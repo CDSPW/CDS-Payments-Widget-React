@@ -1,9 +1,9 @@
 
 [<p align="center"><img src="https://codenvy.com/images/logo-codenvy-black.png"/></p>](https://codenvy.io/f?id=factorygb3ajgi8r97wzvxt)
 <p align="center">(click the CODENVY logo to launch the "factory" link)</p>
-<p align="center">["Demo"](http://demo.cds-payments.surge.sh/)</p>
-<p align="center">["Prod"](http://cds-payments.surge.sh/)</p>
-<p align="center">[Repl](https://repl.it/@joshmccall221/Payments)</p>
+<p align="center"><a src="http://demo.cds-payments.surge.sh/">"Demo"</a></p>
+<p align="center"><a src="http://cds-payments.surge.sh/"> "Prod"</a></p>
+<p align="center"><a src="https://repl.it/@joshmccall221/Payments">Repl</a></p>
 
 <br/> <br/> <br/>
 <hr/>

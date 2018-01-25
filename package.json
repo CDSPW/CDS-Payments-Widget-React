@@ -15,8 +15,8 @@
     "open:dist": "babel-node tools/distServer.js",
     "lint": "esw webpack.config.* src tools --color",
     "lint:watch": "npm run lint -- --watch",
-    "clean-dist": "npm run remove-dist && mkdir dist",
-    "remove-dist": "rimraf ./dist",
+    "clean-dist": "npm run remove-dist && mkdir dist && mkdir demo",
+    "remove-dist": "rimraf ./dist ./demo" ,
     "prebuild": "npm run lint && npm run test && npm run clean-dist",
     "build": "babel-node tools/build.js && npm run open:dist",
     "test": "jest",
@@ -26,7 +26,8 @@
     "test:watch": "jest --watch",
     "open:cover": "npm run test:cover && opn ./coverage/lcov-report/index.html",
     "analyze-bundle": "babel-node ./tools/analyzeBundle.js",
-    "deploy": "npm run prebuild && babel-node tools/build.js && surge --domain cds-payments.surge.sh ./dist"
+    "deploy:demo": "npm run prebuild && babel-node tools/buildDemo.js && surge --domain demo.cds-payments.surge.sh ./demo && git add ./demo && git commit -am 'updates'",
+    "deploy:prod": "npm run prebuild && babel-node tools/build.js && surge --domain cds-payments.surge.sh ./dist && git add ./demo && git commit -am 'updates'"
 
   },
   "author": "Josh McCall",

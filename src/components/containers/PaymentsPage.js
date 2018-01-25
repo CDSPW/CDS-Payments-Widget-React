@@ -20,6 +20,7 @@ export class PaymentsPage extends React.Component {
       initialConfig['payWith'] && this.props.actions.saveFuelSavings(fuelsavings, 'payWith', initialConfig['payWith'].value === '1' ? true : false);
       initialConfig['credit'] && this.props.actions.saveFuelSavings(fuelsavings, 'credit', initialConfig['credit'].value === '1' ? true : false);
       initialConfig['cvv'] && this.props.actions.saveFuelSavings(fuelsavings, 'cvvToggle', initialConfig['cvv'].value === '1' ? true : false);
+      initialConfig['demo'] && this.props.actions.saveFuelSavings(fuelsavings, 'demo', initialConfig['demo'].value === '1' ? true : false);
     }
   }
   handleValidationDisplay = responseCode => {

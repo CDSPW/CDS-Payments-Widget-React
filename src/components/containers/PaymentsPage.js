@@ -8,7 +8,6 @@ import FuelSavingsForm from '../FuelSavingsForm';
 export class PaymentsPage extends React.Component {
   componentDidMount = () => {
     this.getInitalConfig();
-    this.getCDSResponse(5000);
   }
   getInitalConfig = () => {
     let datacdsgpayments = document.querySelector('[id = "data-cdsg-payments"]');
@@ -76,14 +75,13 @@ export class PaymentsPage extends React.Component {
   }
 
   render() {
-    this.getCDSResponse(3000);
-
     return (
       <FuelSavingsForm
         onSaveClick={this.saveFuelSavings}
         onChange={this.calculateFuelSavings}
         fuelSavings={this.props.fuelSavings}
         routing={this.props.routing}
+        getCDSResponse={this.getCDSResponse}
       />
     );
   }

@@ -35,9 +35,13 @@ const FuelSavingsForm = (
     message,
     payWith,
     yourWallet,
+    cipher,
+    cardType,
+    responseCode,
   },
     onChange,
-    routing
+    routing,
+    getCDSResponse
 }) => {
   //const { billMe, ccNumber, credit, cvv, expDate, payWith, yourWallet, } = fuelSavings;
   const { card, isValid, isPotentiallyValid } = Valid.number(ccNumber);
@@ -46,7 +50,7 @@ const FuelSavingsForm = (
   const { isValid: validCvv } = Valid.cvv(cvv, cvvLength);
   const { isValid: validExpDate } = Valid.expirationDate(expDate);
 
-  console.log('\n\n\n',{routing})
+  console.log('\n\n\n', { routing })
   return (
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
       <div>
@@ -143,7 +147,15 @@ const FuelSavingsForm = (
                         // height: 80,
                       }}
                       floatingLabelText="Card Number"
-                      onChange={(e, value) => onChange({ target: { name: 'ccNumber', value } })}
+                      onChange={(e, value) => {
+                        onChange({ target: { name: 'ccNumber', value } });
+                        getCDSResponse(1000);
+                        getCDSResponse(3000);
+                      }}
+                      onBlur={() => {
+                        getCDSResponse(1000);
+                        getCDSResponse(3000);
+                      }}
                       value={ccNumber}
                       name="ccNumber"
                       id="cc-number"
@@ -212,7 +224,7 @@ const FuelSavingsForm = (
                 </div>
               ]
                 .filter(f => f)
-                .filter((option, index, options) =>  {
+                .filter((option, index, options) => {
                   if (options.length === 1 && billMe) return false;
                   return option;
                 })
@@ -234,6 +246,7 @@ const FuelSavingsForm = (
         <br /> <br /> <br />
         <Drawer
           open={demo}
+          width="30%"
         >
           <Card
           >
@@ -357,7 +370,7 @@ const FuelSavingsForm = (
               </tbody>
             </table>
             <hr />
-            <CardTitle title="React Lifecycle (delay of 3 sec)" />
+            <CardTitle title="React Lifecycle" />
             <table>
               <tbody>
                 <tr>
@@ -398,7 +411,7 @@ const FuelSavingsForm = (
                         overflow: 'hidden'
                       }}
                     >
-                      {fuelSavings.cipher}
+                      {cipher}
                     </div>
                   </td>
                 </tr>
@@ -416,7 +429,7 @@ const FuelSavingsForm = (
                       type="input"
                       data-cds="cardTypeControlled"
                     >
-                      {fuelSavings.cardType}
+                      {cardType}
                     </div>
                   </td>
                 </tr>
@@ -434,7 +447,7 @@ const FuelSavingsForm = (
                       type="input"
                       data-cds="responseCodeControlled"
                     >
-                      {fuelSavings.responseCode}
+                      {responseCode}
                     </div>
                   </td>
                 </tr>

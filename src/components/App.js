@@ -10,8 +10,6 @@ import PaymentsPage from './containers/PaymentsPage';
 
 class App extends React.Component {
   render() {
-    const appProps = this.props;
-    console.log({ appProps })
     return (
       <div>
         <PaymentsPage />

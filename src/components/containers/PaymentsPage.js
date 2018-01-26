@@ -23,7 +23,6 @@ export class PaymentsPage extends React.Component {
       initialConfig['allowedCards'] && saveFuelSavings(fuelsavings, 'allowedCards', initialConfig['allowedCards'].value);
       if (initialConfig['allowedCards']) {
         let allowedCards = initialConfig['allowedCards'].value.split(' ');
-        console.log('\n\n\n', { allowedCards })
         if (allowedCards.filter(a => a === 'MC').length) saveFuelSavings(fuelsavings, 'MCToggle', true);
         if (allowedCards.filter(a => a === 'VI').length) saveFuelSavings(fuelsavings, 'VIToggle', true);
         if (allowedCards.filter(a => a === 'DC').length) saveFuelSavings(fuelsavings, 'DCToggle', true);

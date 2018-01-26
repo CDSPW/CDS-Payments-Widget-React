@@ -92,7 +92,7 @@ const FuelSavingsForm = (
                 payWith && <div>
                   <RaisedButton
                     label="Apple Pay"
-                    icon={<img height="100%" src="../images/apple-pay.png" />}
+                    icon={<img height="100%" src="https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/apple-pay.png" />}
                     style={{ margin: 5 }}
                   />
                   <RaisedButton
@@ -119,7 +119,7 @@ const FuelSavingsForm = (
 
 
 
-                credit && <div style={{width:"100%"}}>
+                credit && <div style={{ width: "100%" }}>
                   {
                     [
                       {
@@ -135,23 +135,23 @@ const FuelSavingsForm = (
                       },
                       {
                         niceType: "AmericanExpress",
-                        bool:AXToggle,
-                        image:'../images/americanexpress.png'
+                        bool: AXToggle,
+                        image: '../images/americanexpress.png'
                       },
                       {
                         niceType: "DiscoverCard",
-                        bool:DIToggle,
-                        image:'../images/discover.png'
+                        bool: DIToggle,
+                        image: '../images/discover.png'
                       },
                       {
                         niceType: "DinnersClub",
-                        bool:DCToggle,
-                        image:'../images/dinersclub.png'
+                        bool: DCToggle,
+                        image: '../images/dinersclub.png'
                       },
                       {
                         niceType: "JCB",
-                        bool:JCBToggle,
-                        image:'../images/credit_card.png'
+                        bool: JCBToggle,
+                        image: '../images/credit_card.png'
                       }
                     ].map(card => (
                       <div>
@@ -628,6 +628,54 @@ const FuelSavingsForm = (
             <p align="center"><a href="http://demo.cds-payments.surge.sh/">"Demo"</a></p>
             <p align="center"><a href="http://cds-payments.surge.sh/"> "Prod"</a></p>
             <p align="center"><a href="https://repl.it/@joshmccall221/Payments">Repl</a></p>
+          </Card>
+          <Card>
+            <pre>
+              {`<!DOCTYPE html>
+<html lang="en">
+<script src="https://s3.amazonaws.com/cds-tzn-test/resources/cds-process.min.js"></script>
+<script>
+  CDS
+  .cdsProcess
+  .allowedCards =`}
+              {`[`}
+              {[
+                MCToggle ? '"MC", ' : '',
+                VIToggle ? '"VI", ' : '',
+                AXToggle ? '"AX", ' : '',
+                DIToggle ? '"AX", ' : '',
+                DCToggle ? '"DC", ' : '',
+                JCBToggle ? '"JCB", ' : '',
+              ]}
+              {`]
+  CDS.cdsProcess.clientCode("abc")
+</script>
+<div
+  id="data-cdsg-payments"
+  demo="0"
+  billme="0"
+  credit="1"
+  allowedCards="`}
+              {[
+                MCToggle ? 'MC ' : '',
+                VIToggle ? 'VI ' : '',
+                AXToggle ? 'AX ' : '',
+                DIToggle ? 'AX ' : '',
+                DCToggle ? 'DC ' : '',
+                JCBToggle ? 'JCB ' : '',
+              ]}
+              {`"
+  ></div>
+
+<div id="app"></div>
+<script type="text/javascript" src="https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/dist/main.js"></script>
+
+<link href="https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/dist/main.css" rel="stylesheet">
+</html>
+
+              `
+              }
+            </pre>
           </Card>
 
         </Drawer>

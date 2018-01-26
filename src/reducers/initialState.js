@@ -5,7 +5,8 @@ export default {
     yourWallet: false,
     payWith: false,
     ccNumber: '',
-    demo:false,
+    demo: false,
     responseCode: '',
+    CVVValidationMessage: ''
   }
 };

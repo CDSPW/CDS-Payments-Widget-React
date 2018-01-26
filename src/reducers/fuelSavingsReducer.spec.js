@@ -12,6 +12,7 @@ describe('Reducers::FuelSavings', () => {
     payWith: false,
     responseCode: '',
     yourWallet: false,
+    CVVValidationMessage: ''
     };
   };
 
@@ -24,6 +25,7 @@ describe('Reducers::FuelSavings', () => {
     payWith: false,
     responseCode: '',
     yourWallet: false,
+    CVVValidationMessage: ''
     };
   };
   const dateModified = getFormattedDateTime();

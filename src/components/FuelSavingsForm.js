@@ -25,14 +25,16 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 const FuelSavingsForm = (
   {
   fuelSavings: {
-  MCToggle,
-    VIToggle,
-    DCToggle,
     AXToggle,
+    DCToggle,
     DIToggle,
     JCBToggle,
+    MCToggle,
+    VIToggle,
     billMe,
+    cardType,
     ccNumber,
+    cipher,
     credit,
     cvv,
     cvvToggle,
@@ -40,10 +42,9 @@ const FuelSavingsForm = (
     expDate,
     message,
     payWith,
-    yourWallet,
-    cipher,
-    cardType,
     responseCode,
+    yourWallet,
+    CVVValidationMessage,
   },
     onChange,
     getCDSResponse
@@ -84,6 +85,7 @@ const FuelSavingsForm = (
   payWith="`}{[payWith ? 1 : 0].join('')}{`"
   credit="`}{[credit ? 1 : 0].join('')}{`"
   cvv="`}{[cvv ? 1 : 0].join('')}{`"
+  CVVValidationMessage="`}{[CVVValidationMessage].join('')}{`"
   allowedCards="`}{[
       MCToggle ? 'MC ' : '',
       VIToggle ? 'VI ' : '',
@@ -310,7 +312,7 @@ const FuelSavingsForm = (
                     value={cvv}
                     errorText={
                       (() => {
-                        if (ccNumber !== "" && !validCvv) return niceType ? "not valid..." + niceType + " requires " + cvvLength + " digits." : "not valid...";
+                        if (ccNumber !== "" && !validCvv) return niceType ? CVVValidationMessage + "not valid..." + niceType + " requires " + cvvLength + " digits." : "not valid...";
                       })()
                     }
                   />}
@@ -444,6 +446,17 @@ const FuelSavingsForm = (
                   label="CVV"
                   checked={cvvToggle}
                   style={{ paddingLeft: 20 }}
+                />
+              </ListItem>
+              <ListItem
+              >
+                <TextField
+                  label="CVV Validation warning"
+                  name='CVVValidationMessage'
+                  style={{ paddingLeft: 20 }}
+                  value={CVVValidationMessage}
+                  onChange={onChange}
+                //onChange={() => onChange({ target: { name: 'cvvToggle', value: !cvvToggle } })}
                 />
               </ListItem>
               <ListItem onClick={() => onChange({ target: { name: 'billMe', value: !billMe } })} >

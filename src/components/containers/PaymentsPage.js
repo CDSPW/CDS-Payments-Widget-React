@@ -21,6 +21,7 @@ export class PaymentsPage extends React.Component {
       initialConfig['cvv'] && saveFuelSavings(fuelsavings, 'cvvToggle', initialConfig['cvv'].value === '1' ? true : false);
       initialConfig['demo'] && saveFuelSavings(fuelsavings, 'demo', initialConfig['demo'].value === '1' ? true : false);
       initialConfig['allowedCards'] && saveFuelSavings(fuelsavings, 'allowedCards', initialConfig['allowedCards'].value);
+      initialConfig['CVVValidationMessage'] && saveFuelSavings(fuelsavings, 'CVVValidationMessage', initialConfig['CVVValidationMessage'].value);
       if (initialConfig['allowedCards']) {
         let allowedCards = initialConfig['allowedCards'].value.split(' ');
         if (allowedCards.filter(a => a === 'MC').length) saveFuelSavings(fuelsavings, 'MCToggle', true);

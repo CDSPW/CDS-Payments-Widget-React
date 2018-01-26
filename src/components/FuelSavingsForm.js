@@ -63,9 +63,7 @@ const FuelSavingsForm = (
 <script>
   CDS
   .cdsProcess
-  .allowedCards =`}
-    {`[`}
-    {
+  .allowedCards =`}{`[`}{
       [
         MCToggle ? '"MC", ' : null,
         VIToggle ? '"VI", ' : null,
@@ -75,26 +73,26 @@ const FuelSavingsForm = (
         JCBToggle ? '"JCB", ' : null,
       ]
         .filter(allowed => allowed)
-    }
-    {`]
+    }{`]
   CDS.cdsProcess.clientCode("abc")
 </script>
 <div
   id="data-cdsg-payments"
   demo="0"
-  billme="0"
-  credit="1"
-  allowedCards="`} {[
+  billme="`}{[billMe ? 1 : 0].join('')}{`"
+  yourWallet="`}{[yourWallet ? 1 : 0].join('')}{`"
+  payWith="`}{[payWith? 1 : 0].join('')}{`"
+  credit="`}{[credit ? 1 : 0].join('')}{`"
+  cvv="`}{[cvv ? 1 : 0].join('')}{`"
+  allowedCards="`}{[
       MCToggle ? 'MC ' : '',
       VIToggle ? 'VI ' : '',
       AXToggle ? 'AX ' : '',
       DIToggle ? 'AX ' : '',
       DCToggle ? 'DC ' : '',
       JCBToggle ? 'JCB ' : ''
-    ]
-      .filter(allowed => allowed)
-      .join('')
-    } {`"
+    ].filter(allowed => allowed).join('')
+    }{`"
   ></div>
 
 <div id="app"></div>

@@ -19,6 +19,7 @@ import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
 import Valid from 'card-validator';
 import Drawer from 'material-ui/Drawer';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 
 const FuelSavingsForm = (
@@ -55,6 +56,55 @@ const FuelSavingsForm = (
   const { isValid: validCvv } = Valid.cvv(cvv, cvvLength);
   const { isValid: validExpDate } = Valid.expirationDate(expDate);
 
+  const markup = <pre>
+    {`<!DOCTYPE html>
+<html lang="en">
+<script src="https://s3.amazonaws.com/cds-tzn-test/resources/cds-process.min.js"></script>
+<script>
+  CDS
+  .cdsProcess
+  .allowedCards =`}
+    {`[`}
+    {
+      [
+        MCToggle ? '"MC", ' : null,
+        VIToggle ? '"VI", ' : null,
+        AXToggle ? '"AX", ' : null,
+        DIToggle ? '"AX", ' : null,
+        DCToggle ? '"DC", ' : null,
+        JCBToggle ? '"JCB", ' : null,
+      ]
+        .filter(allowed => allowed)
+    }
+    {`]
+  CDS.cdsProcess.clientCode("abc")
+</script>
+<div
+  id="data-cdsg-payments"
+  demo="0"
+  billme="0"
+  credit="1"
+  allowedCards="`} {[
+      MCToggle ? 'MC ' : '',
+      VIToggle ? 'VI ' : '',
+      AXToggle ? 'AX ' : '',
+      DIToggle ? 'AX ' : '',
+      DCToggle ? 'DC ' : '',
+      JCBToggle ? 'JCB ' : ''
+    ]
+      .filter(allowed => allowed)
+      .join('')
+    } {`"
+  ></div>
+
+<div id="app"></div>
+<script type="text/javascript" src="https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/dist/main.js"></script>
+
+<link href="https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/dist/main.css" rel="stylesheet">
+</html> `}
+  </pre>;
+
+  const { props: { children: markupChildren } } = markup
   return (
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
       <div>
@@ -93,12 +143,12 @@ const FuelSavingsForm = (
                   />
                   <RaisedButton
                     label="PayPal"
-                    icon={<img height="100%" src="https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/amazon-pay.png" />}
+                    icon={<img height="100%" src="../images/amazon-pay.png" />}
                     style={{ margin: 5 }}
                   />
                   <RaisedButton
                     label="Amazon Pay"
-                    icon={<img height="100%" src="https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/amazon-pay.png" />}
+                    icon={<img height="100%" src="../images/amazon-pay.png" />}
                     style={{ margin: 5 }}
                   />
                   <CardTitle
@@ -121,35 +171,35 @@ const FuelSavingsForm = (
                       {
                         niceType: "Visa",
                         bool: VIToggle,
-                        image: "https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/visa.png",
+                        image: "../images/visa.png",
 
                       },
                       {
                         niceType: "MasterCard",
                         bool: MCToggle,
-                        image: "https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/mastercard.png",
+                        image: "../images/mastercard.png",
                       },
                       {
                         niceType: "AmericanExpress",
                         bool: AXToggle,
-                        image: 'https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/americanexpress.png'
+                        image: '../images/americanexpress.png'
                       },
                       {
                         niceType: "DiscoverCard",
                         bool: DIToggle,
-                        image: 'https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/discover.png'
+                        image: '../images/discover.png'
                       },
                       {
                         niceType: "DinnersClub",
                         bool: DCToggle,
-                        image: 'https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/dinersclub.png'
+                        image: '../images/dinersclub.png'
                       },
                       {
                         niceType: "JCB",
                         bool: JCBToggle,
-                        image: 'https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/credit_card.png'
+                        image: '../images/credit_card.png'
                       }
-                    ].map((card, key)=> (
+                    ].map((card, key) => (
                       <div key={key}>
                         {
                           card.bool && <div style={{
@@ -626,52 +676,22 @@ const FuelSavingsForm = (
             <p align="center"><a href="https://repl.it/@joshmccall221/Payments">Repl</a></p>
           </Card>
           <Card>
-            <pre>
-              {`<!DOCTYPE html>
-<html lang="en">
-<script src="https://s3.amazonaws.com/cds-tzn-test/resources/cds-process.min.js"></script>
-<script>
-  CDS
-  .cdsProcess
-  .allowedCards =`}
-              {`[`}
-              {[
-                MCToggle ? '"MC", ' : '',
-                VIToggle ? '"VI", ' : '',
-                AXToggle ? '"AX", ' : '',
-                DIToggle ? '"AX", ' : '',
-                DCToggle ? '"DC", ' : '',
-                JCBToggle ? '"JCB", ' : '',
-              ]}
-              {`]
-  CDS.cdsProcess.clientCode("abc")
-</script>
-<div
-  id="data-cdsg-payments"
-  demo="0"
-  billme="0"
-  credit="1"
-  allowedCards="`}
-              {[
-                MCToggle ? 'MC ' : '',
-                VIToggle ? 'VI ' : '',
-                AXToggle ? 'AX ' : '',
-                DIToggle ? 'AX ' : '',
-                DCToggle ? 'DC ' : '',
-                JCBToggle ? 'JCB ' : '',
-              ]}
-              {`"
-  ></div>
+            <CopyToClipboard
+              //onCopy={this.onCopy}
+              options={{ message: 'Whoa!' }}
+              //text={markup}>
+              text={markupChildren.join('')}>
+              <button
+                onClick={({ target: { innerHTML } }) => {
+                  console.log(`Clicked on "${innerHTML}"!`); // eslint-disable-line
+                  const { props: { children: markupChildren } } = markup
+                  console.log('\n\n\n', { markup }); // eslint-disable-line
+                  console.log('\n\n\n', markupChildren.join('')); // eslint-disable-line
+                }}
+              >Copy to clipboard with onClick prop</button>
+            </CopyToClipboard>
 
-<div id="app"></div>
-<script type="text/javascript" src="https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/dist/main.js"></script>
-
-<link href="https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/dist/main.css" rel="stylesheet">
-</html>
-
-              `
-              }
-            </pre>
+            {markup}
           </Card>
 
         </Drawer>

@@ -5,6 +5,7 @@ export default {
     yourWallet: false,
     payWith: false,
     ccNumber: '',
+    demo:false,
     responseCode: '',
   }
 };

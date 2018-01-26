@@ -15,7 +15,6 @@ import Avatar from 'material-ui/Avatar';
 import List from 'material-ui/List/List';
 import ListItem from 'material-ui/List/ListItem';
 import RaisedButton from 'material-ui/RaisedButton';
-import FontIcon from 'material-ui/FontIcon';
 import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
 import Valid from 'card-validator';
@@ -64,7 +63,7 @@ const FuelSavingsForm = (
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
       <div>
         <Card
-          style={{ width: 650 }}
+          style={{ width: 750 }}
         >
           {false && <CardTitle title="Choose your preferred payment option:" />}
           <List>
@@ -93,17 +92,17 @@ const FuelSavingsForm = (
                 payWith && <div>
                   <RaisedButton
                     label="Apple Pay"
-                    icon={<FontIcon className="muidocs-icon-custom-payment" />}
+                    icon={<img height="100%" src="../images/apple-pay.png" />}
                     style={{ margin: 5 }}
                   />
                   <RaisedButton
                     label="PayPal"
-                    icon={<FontIcon className="muidocs-icon-custom-payment" />}
+                    icon={<img height="100%" src="../images/amazon-pay.png" />}
                     style={{ margin: 5 }}
                   />
                   <RaisedButton
                     label="Amazon Pay"
-                    icon={<FontIcon className="muidocs-icon-custom-payment" />}
+                    icon={<img height="100%" src="../images/amazon-pay.png" />}
                     style={{ margin: 5 }}
                   />
                   <CardTitle
@@ -115,31 +114,83 @@ const FuelSavingsForm = (
                   />
                   <Divider />
                 </div>,
-                credit && <div>
-                  {VIToggle && <RaisedButton
-                    label="Visa"
-                    icon={<FontIcon className="muidocs-icon-custom-payment" />}
-                    style={{ margin: 5 }}
-                    disabled={niceType !== 'Visa'}
-                  />}
-                  {MCToggle && <RaisedButton
-                    label="MasterCard"
-                    icon={<FontIcon className="muidocs-icon-custom-payment" />}
-                    style={{ margin: 5 }}
-                    disabled={niceType !== 'MasterCard'}
-                  />}
-                  {DIToggle && <RaisedButton
-                    label="Discover"
-                    icon={<FontIcon className="muidocs-icon-custom-payment" />}
-                    style={{ margin: 5 }}
-                    disabled={niceType !== 'Discover'}
-                  />}
-                  {AXToggle && <RaisedButton
-                    label="American Express"
-                    icon={<FontIcon className="muidocs-icon-custom-payment" />}
-                    style={{ margin: 5 }}
-                    disabled={niceType !== 'AmericanExpress'}
-                  />}
+
+
+
+
+
+                credit && <div style={{width:"100%"}}>
+                  {
+                    [
+                      {
+                        niceType: "Visa",
+                        bool: VIToggle,
+                        image: "../images/visa.png",
+
+                      },
+                      {
+                        niceType: "MasterCard",
+                        bool: MCToggle,
+                        image: "../images/mastercard.png",
+                      },
+                      {
+                        niceType: "AmericanExpress",
+                        bool:AXToggle,
+                        image:'../images/americanexpress.png'
+                      },
+                      {
+                        niceType: "DiscoverCard",
+                        bool:DIToggle,
+                        image:'../images/discover.png'
+                      },
+                      {
+                        niceType: "DinnersClub",
+                        bool:DCToggle,
+                        image:'../images/dinersclub.png'
+                      },
+                      {
+                        niceType: "JCB",
+                        bool:JCBToggle,
+                        image:'../images/credit_card.png'
+                      }
+                    ].map(card => (
+                      <div>
+                        {
+                          card.bool && <div style={{
+                            display: 'inline-block',
+                            float: 'left',
+                            height: '45px',
+                            margin: 5,
+                            position: 'relative',
+                            width: '95px',
+                          }}
+                          >
+                            <RaisedButton
+                              //label="Visa"
+                              icon={<img height="100%" src={card.image} />}
+                              style={{
+                                margin: 5,
+                              }}
+                              disabled={niceType !== card.niceType}
+                            />
+                            <div style={{
+                              background: 'gray',
+                              height: '100%',
+                              width: '100%',
+                              opacity: (niceType !== card.niceType) ? '.75' : 0,
+                              top: 0,
+                              left: 0,
+                              position: 'absolute',
+                              padding: 0,
+                            }}
+                            //http://www.korenlc.com/css-overlay-how-to-create-a-simple-css-overlay/
+                            >
+                            </div>
+                          </div>
+                        }
+                      </div>
+                    ))
+                  }
                   <div
                     style={{
                       //height: 100,
@@ -239,9 +290,7 @@ const FuelSavingsForm = (
                 })
                 .map((e, index, options) =>
                   (<ListItem
-                    leftAvatar={(options.length > 1) && <Avatar style={{ marginTop: '10px' }} size={35}>
-                      {options.length > 1 ? index + 1 : ''}
-                    </Avatar>}
+                    { ...(options.length > 1) && { leftAvatar: <Avatar style={{ marginTop: '10px' }} size={35}> {index + 1} </Avatar> } }
                     disabled
                     key={index}
                   >
@@ -291,21 +340,12 @@ const FuelSavingsForm = (
                 />
               </ListItem>
               <ListItem
-                onClick={() => onChange({ target: { name: 'cvvToggle', value: !cvvToggle } })}
-              >
-                <Checkbox
-                  label="CVV"
-                  checked={cvvToggle}
-                  style={{ paddingLeft: 20 }}
-                />
-              </ListItem>
-              <ListItem
                 onClick={() => onChange({ target: { name: 'MCToggle', value: !MCToggle } })}
               >
                 <Checkbox
                   label="MC"
                   checked={MCToggle}
-                  style={{ paddingLeft: 20 }}
+                  style={{ paddingLeft: 40 }}
                 />
               </ListItem>
               <ListItem
@@ -314,7 +354,7 @@ const FuelSavingsForm = (
                 <Checkbox
                   label="VI"
                   checked={VIToggle}
-                  style={{ paddingLeft: 20 }}
+                  style={{ paddingLeft: 40 }}
                 />
               </ListItem>
               <ListItem
@@ -323,7 +363,7 @@ const FuelSavingsForm = (
                 <Checkbox
                   label="AX"
                   checked={AXToggle}
-                  style={{ paddingLeft: 20 }}
+                  style={{ paddingLeft: 40 }}
                 />
               </ListItem>
               <ListItem
@@ -332,7 +372,7 @@ const FuelSavingsForm = (
                 <Checkbox
                   label="DI"
                   checked={DIToggle}
-                  style={{ paddingLeft: 20 }}
+                  style={{ paddingLeft: 40 }}
                 />
               </ListItem>
               <ListItem
@@ -341,7 +381,7 @@ const FuelSavingsForm = (
                 <Checkbox
                   label="DC"
                   checked={DCToggle}
-                  style={{ paddingLeft: 20 }}
+                  style={{ paddingLeft: 40 }}
                 />
               </ListItem>
               <ListItem
@@ -350,6 +390,15 @@ const FuelSavingsForm = (
                 <Checkbox
                   label="JCB"
                   checked={JCBToggle}
+                  style={{ paddingLeft: 40 }}
+                />
+              </ListItem>
+              <ListItem
+                onClick={() => onChange({ target: { name: 'cvvToggle', value: !cvvToggle } })}
+              >
+                <Checkbox
+                  label="CVV"
+                  checked={cvvToggle}
                   style={{ paddingLeft: 20 }}
                 />
               </ListItem>
@@ -583,7 +632,7 @@ const FuelSavingsForm = (
 
         </Drawer>
       </div>
-    </MuiThemeProvider>
+    </MuiThemeProvider >
   );
 };
 FuelSavingsForm.propTypes = {

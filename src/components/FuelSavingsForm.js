@@ -25,6 +25,13 @@ import Drawer from 'material-ui/Drawer';
 const FuelSavingsForm = (
   {
   fuelSavings: {
+  MCToggle,
+    VIToggle,
+    DCToggle,
+    AXToggle,
+    DIToggle,
+    JCBToggle,
+    allowedCards,
     billMe,
     ccNumber,
     credit,
@@ -43,6 +50,8 @@ const FuelSavingsForm = (
     routing,
     getCDSResponse
 }) => {
+  allowedCards && console.log('\n\n\n', allowedCards.split(',').filter(a => a === 'some'))
+
   //const { billMe, ccNumber, credit, cvv, expDate, payWith, yourWallet, } = fuelSavings;
   const { card, isValid, isPotentiallyValid } = Valid.number(ccNumber);
   const { niceType, lengths: cardLength } = card ? card : '';
@@ -107,30 +116,30 @@ const FuelSavingsForm = (
                   <Divider />
                 </div>,
                 credit && <div>
-                  <RaisedButton
+                  {VIToggle && <RaisedButton
                     label="Visa"
                     icon={<FontIcon className="muidocs-icon-custom-payment" />}
                     style={{ margin: 5 }}
                     disabled={niceType !== 'Visa'}
-                  />
-                  <RaisedButton
+                  />}
+                  {MCToggle && <RaisedButton
                     label="MasterCard"
                     icon={<FontIcon className="muidocs-icon-custom-payment" />}
                     style={{ margin: 5 }}
                     disabled={niceType !== 'MasterCard'}
-                  />
-                  <RaisedButton
+                  />}
+                  {DIToggle && <RaisedButton
                     label="Discover"
                     icon={<FontIcon className="muidocs-icon-custom-payment" />}
                     style={{ margin: 5 }}
                     disabled={niceType !== 'Discover'}
-                  />
-                  <RaisedButton
+                  />}
+                  {AXToggle && <RaisedButton
                     label="American Express"
                     icon={<FontIcon className="muidocs-icon-custom-payment" />}
                     style={{ margin: 5 }}
                     disabled={niceType !== 'AmericanExpress'}
-                  />
+                  />}
                   <div
                     style={{
                       //height: 100,
@@ -287,6 +296,60 @@ const FuelSavingsForm = (
                 <Checkbox
                   label="CVV"
                   checked={cvvToggle}
+                  style={{ paddingLeft: 20 }}
+                />
+              </ListItem>
+              <ListItem
+                onClick={() => onChange({ target: { name: 'MCToggle', value: !MCToggle } })}
+              >
+                <Checkbox
+                  label="MC"
+                  checked={MCToggle}
+                  style={{ paddingLeft: 20 }}
+                />
+              </ListItem>
+              <ListItem
+                onClick={() => onChange({ target: { name: 'VIToggle', value: !VIToggle } })}
+              >
+                <Checkbox
+                  label="VI"
+                  checked={VIToggle}
+                  style={{ paddingLeft: 20 }}
+                />
+              </ListItem>
+              <ListItem
+                onClick={() => onChange({ target: { name: 'AXToggle', value: !AXToggle } })}
+              >
+                <Checkbox
+                  label="AX"
+                  checked={AXToggle}
+                  style={{ paddingLeft: 20 }}
+                />
+              </ListItem>
+              <ListItem
+                onClick={() => onChange({ target: { name: 'DIToggle', value: !DIToggle } })}
+              >
+                <Checkbox
+                  label="DI"
+                  checked={DIToggle}
+                  style={{ paddingLeft: 20 }}
+                />
+              </ListItem>
+              <ListItem
+                onClick={() => onChange({ target: { name: 'DCToggle', value: !DCToggle } })}
+              >
+                <Checkbox
+                  label="DC"
+                  checked={DCToggle}
+                  style={{ paddingLeft: 20 }}
+                />
+              </ListItem>
+              <ListItem
+                onClick={() => onChange({ target: { name: 'JCBToggle', value: !JCBToggle } })}
+              >
+                <Checkbox
+                  label="JCB"
+                  checked={JCBToggle}
                   style={{ paddingLeft: 20 }}
                 />
               </ListItem>
@@ -512,6 +575,12 @@ const FuelSavingsForm = (
             </table>
 
           </Card>
+          <Card>
+            <p align="center"><a href="http://demo.cds-payments.surge.sh/">"Demo"</a></p>
+            <p align="center"><a href="http://cds-payments.surge.sh/"> "Prod"</a></p>
+            <p align="center"><a href="https://repl.it/@joshmccall221/Payments">Repl</a></p>
+          </Card>
+
         </Drawer>
       </div>
     </MuiThemeProvider>

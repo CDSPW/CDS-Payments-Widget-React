@@ -81,7 +81,7 @@ const FuelSavingsForm = (
   demo="0"
   billme="`}{[billMe ? 1 : 0].join('')}{`"
   yourWallet="`}{[yourWallet ? 1 : 0].join('')}{`"
-  payWith="`}{[payWith? 1 : 0].join('')}{`"
+  payWith="`}{[payWith ? 1 : 0].join('')}{`"
   credit="`}{[credit ? 1 : 0].join('')}{`"
   cvv="`}{[cvv ? 1 : 0].join('')}{`"
   allowedCards="`}{[
@@ -686,10 +686,13 @@ const FuelSavingsForm = (
                   console.log('\n\n\n', { markup }); // eslint-disable-line
                   console.log('\n\n\n', markupChildren.join('')); // eslint-disable-line
                 }}
-              >Copy to clipboard with onClick prop</button>
+              >Click here to copy to clipboard!</button>
             </CopyToClipboard>
-
-            {markup}
+            <br /> <br />
+            <TextField
+              multiLine={true}
+              value={markupChildren.join('')}
+            />
           </Card>
 
         </Drawer>

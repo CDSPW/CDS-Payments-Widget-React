@@ -96,7 +96,7 @@ const FuelSavingsForm = (
   ></div>
 
 <div id="app"></div>
-<script type="text/javascript" src="https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/dist/main.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/dist/payments-widget.js"></script>
 
 <link href="https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/dist/main.css" rel="stylesheet">
 </html> `}

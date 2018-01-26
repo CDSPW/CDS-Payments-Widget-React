@@ -12,7 +12,7 @@ export class PaymentsPage extends React.Component {
   getInitalConfig = () => {
     let datacdsgpayments = document.querySelector('[id = "data-cdsg-payments"]');
     let initialConfig = datacdsgpayments && datacdsgpayments['attributes'];
-    let { fuelsavings, actions: {saveFuelSavings} } = this.props;
+    let { fuelsavings, actions: { saveFuelSavings } } = this.props;
     if (initialConfig) {
       initialConfig['billMe'] && saveFuelSavings(fuelsavings, 'billMe', initialConfig['billMe'].value === '1' ? true : false);
       initialConfig['yourWallet'] && saveFuelSavings(fuelsavings, 'yourWallet', initialConfig['yourWallet'].value === '1' ? true : false);
@@ -21,14 +21,16 @@ export class PaymentsPage extends React.Component {
       initialConfig['cvv'] && saveFuelSavings(fuelsavings, 'cvvToggle', initialConfig['cvv'].value === '1' ? true : false);
       initialConfig['demo'] && saveFuelSavings(fuelsavings, 'demo', initialConfig['demo'].value === '1' ? true : false);
       initialConfig['allowedCards'] && saveFuelSavings(fuelsavings, 'allowedCards', initialConfig['allowedCards'].value);
-      let allowedCards = initialConfig['allowedCards'].value.split(' ');
-      console.log('\n\n\n', {allowedCards})
-      if (allowedCards.filter(a=>a==='MC').length) saveFuelSavings(fuelsavings, 'MCToggle', true);
-      if (allowedCards.filter(a=>a==='VI').length) saveFuelSavings(fuelsavings, 'VIToggle', true);
-      if (allowedCards.filter(a=>a==='DC').length) saveFuelSavings(fuelsavings, 'DCToggle', true);
-      if (allowedCards.filter(a=>a==='AX').length) saveFuelSavings(fuelsavings, 'AXToggle', true);
-      if (allowedCards.filter(a=>a==='DI').length) saveFuelSavings(fuelsavings, 'DIToggle', true);
-      if (allowedCards.filter(a=>a==='JCB').length) saveFuelSavings(fuelsavings, 'JCBToggle', true);
+      if (initialConfig['allowedCards']) {
+        let allowedCards = initialConfig['allowedCards'].value.split(' ');
+        console.log('\n\n\n', { allowedCards })
+        if (allowedCards.filter(a => a === 'MC').length) saveFuelSavings(fuelsavings, 'MCToggle', true);
+        if (allowedCards.filter(a => a === 'VI').length) saveFuelSavings(fuelsavings, 'VIToggle', true);
+        if (allowedCards.filter(a => a === 'DC').length) saveFuelSavings(fuelsavings, 'DCToggle', true);
+        if (allowedCards.filter(a => a === 'AX').length) saveFuelSavings(fuelsavings, 'AXToggle', true);
+        if (allowedCards.filter(a => a === 'DI').length) saveFuelSavings(fuelsavings, 'DIToggle', true);
+        if (allowedCards.filter(a => a === 'JCB').length) saveFuelSavings(fuelsavings, 'JCBToggle', true);
+      }
     }
   }
   handleValidationDisplay = responseCode => {
@@ -104,7 +106,7 @@ PaymentsPage.propTypes = {
 function mapStateToProps(state) {
   return {
     fuelSavings: state.fuelSavings,
-    routing:state.routing
+    routing: state.routing
   };
 }
 

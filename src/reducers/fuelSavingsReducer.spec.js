@@ -4,7 +4,17 @@ import { getFormattedDateTime } from '../utils/dates';
 
 describe('Reducers::FuelSavings', () => {
   const getInitialState = () => {
-    return { "CVVValidationMessage": "", "billMe": true, "ccNumber": "", "credit": true, "cvvToggle": true, "demo": true, "payWith": false, "responseCode": "", "yourWallet": false };
+    return {
+      "CVVValidationMessage": "",
+      "billMe": true,
+      "ccNumber": "",
+      "credit": true,
+      "cvvToggle": true,
+      "demo": true,
+      "payWith": false,
+      "responseCode": "",
+      "yourWallet": false
+    };
   };
 
   const getAppState = () => {

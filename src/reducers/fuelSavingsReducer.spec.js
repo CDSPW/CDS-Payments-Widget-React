@@ -4,28 +4,19 @@ import { getFormattedDateTime } from '../utils/dates';
 
 describe('Reducers::FuelSavings', () => {
   const getInitialState = () => {
-    return {
-    billMe: false,
-    ccNumber: '',
-    credit: true,
-    demo:false,
-    payWith: false,
-    responseCode: '',
-    yourWallet: false,
-    CVVValidationMessage: ''
-    };
+    return { "CVVValidationMessage": "", "billMe": true, "ccNumber": "", "credit": true, "cvvToggle": true, "demo": true, "payWith": false, "responseCode": "", "yourWallet": false };
   };
 
   const getAppState = () => {
     return {
-    billMe: false,
-    ccNumber: '',
-    credit: true,
-    demo:false,
-    payWith: false,
-    responseCode: '',
-    yourWallet: false,
-    CVVValidationMessage: ''
+      billMe: false,
+      ccNumber: '',
+      credit: true,
+      demo: false,
+      payWith: false,
+      responseCode: '',
+      yourWallet: false,
+      CVVValidationMessage: ''
     };
   };
   const dateModified = getFormattedDateTime();

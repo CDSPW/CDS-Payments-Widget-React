@@ -1,11 +1,12 @@
 export default {
   fuelSavings: {
-    billMe: false,
+    billMe: true,
     credit: true,
     yourWallet: false,
     payWith: false,
     ccNumber: '',
-    demo: false,
+    demo: true,
+    cvvToggle: true,
     responseCode: '',
     CVVValidationMessage: ''
   }

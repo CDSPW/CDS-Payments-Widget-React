@@ -29,7 +29,7 @@
     "test:watch": "jest --watch",
     "open:cover": "npm run test:cover && opn ./coverage/lcov-report/index.html",
     "analyze-bundle": "babel-node ./tools/analyzeBundle.js",
-    "deploy:demo": "npm run prebuild:demo && babel-node tools/buildDemo.js && surge --domain demo.cds-payments.surge.sh ./demo && git add . && git commit -am 'updates' && git push",
+    "deploy:react": "npm run prebuild:demo && babel-node tools/buildDemo.js && surge --domain react.cds-payments.surge.sh ./demo && git add . && git commit -am 'updates' && git push",
     "deploy:prod": "npm run prebuild:prod && babel-node tools/build.js && surge --domain cds-payments.surge.sh ./dist && git add . && git commit -am 'updates' && git push"
   },
   "author": "Josh McCall",
